@@ -1,0 +1,29 @@
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Basics
+*.py[cod]
+__pycache__
+
+# Logs
+*.log
+pip-log.txt
+
+# Translations
+*.mo
+*.pot
+
+# Vim
+
+*~
+*.swp
+*.swo
+
+# virtual environments
+venv/
+
+# User-uploaded media
+media/

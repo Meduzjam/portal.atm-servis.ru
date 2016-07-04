@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+	<h4>Другие пользователи</h4>
+	<ul>
+		{% for ouser in alluser %}
+    	<li>{{ ouser.username }} {{ ouser.profile.title }} {{ ouser.first_name }} {{ ouser.last_name }} | Заходил: {{ ouser.last_login }}</li>
+		{% endfor %}
+	</ul>
+
+{% endblock content %}
