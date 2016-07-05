@@ -44,5 +44,7 @@ def update_profile(sender, user=None, ldap_user=None, **kwargs):
         Profile.objects.create(user=user, title = title)
        
 
+
+
 # подвязываемся к сигналу бэкэнда ldap аутентификации
 django_auth_ldap.backend.populate_user.connect(update_profile)
