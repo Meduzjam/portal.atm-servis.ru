@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'project.apps.ProjectConfig',
+    'timesheet.apps.TimesheetConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

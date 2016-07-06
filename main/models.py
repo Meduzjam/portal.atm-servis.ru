@@ -2,18 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import django_auth_ldap.backend
 
-class Contact(models.Model):
-
-    first_name = models.CharField(
-        max_length=255,
-    )
-    last_name = models.CharField(
-        max_length=255,
-    )
-
-    email = models.EmailField()
-
-
 class Profile(models.Model):
     """model to represent additional information about users"""
     class Meta:
@@ -25,7 +13,7 @@ class Profile(models.Model):
 
     title = models.CharField(
         max_length=255,
-        verbose_name='Должность',
+        verbose_name='должность',
         blank=True
     )
     def __str__(self):
