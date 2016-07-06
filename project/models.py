@@ -62,7 +62,6 @@ class Plan(models.Model):
 	
 	year = models.IntegerField(
 		verbose_name='год',
-		max_length=4,
 		choices=YEAR_CHOICES, 
 		default=datetime.date.today().year+1,
 	)
