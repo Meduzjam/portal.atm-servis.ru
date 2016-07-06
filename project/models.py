@@ -8,8 +8,9 @@ class Project(models.Model):
 		verbose_name = 'проект'
 		verbose_name_plural = 'проекты'
 
-	name = models.DateField(
-		verbose_name='Название',
+	name = models.CharField(
+		max_length=255,
+		verbose_name='название',
 	)
 
 	def __str__(self):
