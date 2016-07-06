@@ -13,6 +13,4 @@ class UserProfileAdmin(UserAdmin):
 
 admin.site.register(User, UserProfileAdmin)
 
-admin.site.register(Contact)
-
 # Register your models here.
