@@ -22,7 +22,7 @@ class Task(models.Model):
 		verbose_name_plural = 'задачи'
 
 	parent = models.ForeignKey(
-		self,
+		"self",
 		on_delete=models.CASCADE,
 	)
 	
