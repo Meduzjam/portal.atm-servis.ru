@@ -32,4 +32,5 @@ class Works(models.Model):
 	comment = models.CharField(
 		max_length=255,
 		verbose_name='комментарий',
-		blank=True
+		blank=True,
+	)
