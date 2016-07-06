@@ -70,7 +70,7 @@ class Plan(models.Model):
 	)
 
 	def __str__(self):
-		return self.department + str(year)
+		return self.department + str(self.year)
 
 class PlanTask(models.Model):
 	class Meta:
