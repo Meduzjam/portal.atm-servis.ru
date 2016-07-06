@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 
 class TaskAdmin(admin.ModelAdmin):
-	list_display = ("name","parent__name")
+	list_display = ("name","parent")
 
 admin.site.register(Project)
 admin.site.register(Task,TaskAdmin)
