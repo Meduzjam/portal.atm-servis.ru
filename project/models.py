@@ -24,6 +24,7 @@ class Task(models.Model):
 
 	parent = models.ForeignKey(
 		"self",
+		verbose_name='группа',
 		on_delete=models.CASCADE,
 		null = True,
 		blank = True,
@@ -50,7 +51,7 @@ class Plan(models.Model):
 
 	DEPARTMENT_CHOICES = (
 		(PROGRAM, 'Разработка ПО'),
-		(DESIGN, 'Проктирование'),
+		(DESIGN, 'Проектирование'),
 		(IMPLEMENT, 'Внедрение'),
 	)
 
@@ -70,7 +71,7 @@ class Plan(models.Model):
 	)
 
 	def __str__(self):
-		return self.department + str(self.year)
+		return DEPARTMENT_CHOICES(self.department) + str(self.year)
 
 class PlanTask(models.Model):
 	class Meta:
