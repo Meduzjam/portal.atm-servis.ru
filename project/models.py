@@ -24,7 +24,8 @@ class Task(models.Model):
 	parent = models.ForeignKey(
 		"self",
 		on_delete=models.CASCADE,
-		null = True
+		null = True,
+		blank = True,
 	)
 	
 	name = models.CharField(
