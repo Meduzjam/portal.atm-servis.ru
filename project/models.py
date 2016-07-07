@@ -89,14 +89,14 @@ class PlanTask(models.Model):
 	)
 
 	project = models.ForeignKey(
-		verbose_name='проект',
 		Project,
+		verbose_name='проект',
 		on_delete=models.CASCADE,
 	)
 
 	task = models.ManyToManyField(
-		verbose_name='задача',
 		Task,
+		verbose_name='задача',
 	)
 	
 	
