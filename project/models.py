@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from mptt.models import MPTTModel, TreeForeignKey
 import datetime
 
 class Project(models.Model):
@@ -16,24 +17,23 @@ class Project(models.Model):
 	def __str__(self):
 		return self.name	
 
-class Task(models.Model):
+class Task(MPTTModel):
 	class Meta:
 		db_table = 'project_task'
 		verbose_name = 'задача'
 		verbose_name_plural = 'задачи'
 
-	parent = models.ForeignKey(
-		"self",
-		verbose_name='группа',
-		on_delete=models.CASCADE,
-		null = True,
-		blank = True,
-	)
-	
 	name = models.CharField(
 		max_length=255,
 		verbose_name='название',
 	)
+
+	parent = TreeForeignKey(
+		'self', 
+		null=True, 
+		blank=True, 
+		related_name='children', 
+		db_index=True)
 
 	def __str__(self):
 		return self.name
@@ -71,7 +71,7 @@ class Plan(models.Model):
 	)
 
 	def __str__(self):
-		return DEPARTMENT_CHOICES(self.department) + str(self.year)
+		return self.department + str(self.year)
 
 class PlanTask(models.Model):
 	class Meta:
@@ -94,4 +94,5 @@ class PlanTask(models.Model):
 		Task,
 		on_delete=models.CASCADE,
 	)
+	
 	

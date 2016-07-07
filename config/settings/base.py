@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
     'main.apps.MainConfig',
     'project.apps.ProjectConfig',
     'timesheet.apps.TimesheetConfig',
