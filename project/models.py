@@ -94,7 +94,6 @@ class PlanTask(models.Model):
 
 	task = models.ManyToManyField(
 		Task,
-		on_delete=models.CASCADE,
 	)
 	
 	
