@@ -83,8 +83,8 @@ class PlanTask(models.Model):
 		unique_together = (('plan','project'),)
 
 	plan = models.ForeignKey(
-		verbose_name='план',
 		Plan,
+		verbose_name='план',
 		on_delete=models.CASCADE,
 	)
 
