@@ -83,16 +83,19 @@ class PlanTask(models.Model):
 		unique_together = (('plan','project'),)
 
 	plan = models.ForeignKey(
+		verbose_name='план',
 		Plan,
 		on_delete=models.CASCADE,
 	)
 
 	project = models.ForeignKey(
+		verbose_name='проект',
 		Project,
 		on_delete=models.CASCADE,
 	)
 
 	task = models.ManyToManyField(
+		verbose_name='задача',
 		Task,
 	)
 	
