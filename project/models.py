@@ -34,6 +34,8 @@ class Task(MPTTModel):
 		blank=True, 
 		related_name='children', 
 		db_index=True)
+    
+
 
 	def __str__(self):
 		return self.name
@@ -90,7 +92,7 @@ class PlanTask(models.Model):
 		on_delete=models.CASCADE,
 	)
 
-	task = models.ForeignKey(
+	task = models.ManyToManyField(
 		Task,
 		on_delete=models.CASCADE,
 	)
