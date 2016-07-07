@@ -80,7 +80,7 @@ class PlanTask(models.Model):
 		db_table = 'project_plan_task'
 		verbose_name = 'задача плана'
 		verbose_name_plural = 'задачи плана'
-		unique_together = (('plan','project','task'),)
+		unique_together = (('plan','project'),)
 
 	plan = models.ForeignKey(
 		Plan,
