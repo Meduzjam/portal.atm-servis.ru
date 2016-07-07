@@ -22,7 +22,6 @@ class PlanTaskAdmin(admin.ModelAdmin):
 
 	inlines = [
 		PlanTaskInline,
-		PositionsInline,
 		]
 
 
