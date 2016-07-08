@@ -5,7 +5,7 @@ import datetime
 
 class Project(models.Model):
 	class Meta:
-		db_table = 'project'
+		db_table = 'prj_project'
 		verbose_name = 'проект'
 		verbose_name_plural = 'проекты'
 
@@ -19,7 +19,7 @@ class Project(models.Model):
 
 class Task(MPTTModel):
 	class Meta:
-		db_table = 'project_task'
+		db_table = 'prj_task'
 		verbose_name = 'задача'
 		verbose_name_plural = 'задачи'
 
@@ -34,15 +34,14 @@ class Task(MPTTModel):
 		blank=True, 
 		related_name='children', 
 		db_index=True)
+
     
-
-
-	def __str__(self):
+    def __str__(self):
 		return self.name
 
 class Plan(models.Model):
 	class Meta:
-		db_table = 'project_plan'
+		db_table = 'prj_plan'
 		verbose_name = 'план'
 		verbose_name_plural = 'план'
 		unique_together = (('department','year'),)
@@ -75,11 +74,12 @@ class Plan(models.Model):
 	def __str__(self):
 		return self.department + str(self.year)
 
-class PlanTask(models.Model):
+
+class ProjectPlan(models.Model):
 	class Meta:
-		db_table = 'project_plan_task'
-		verbose_name = 'задача плана'
-		verbose_name_plural = 'задачи плана'
+		db_table = 'prj_project_plan'
+		verbose_name = 'плана проекта'
+		verbose_name_plural = 'плана проектов'
 		unique_together = (('plan','project'),)
 
 	plan = models.ForeignKey(
@@ -96,7 +96,44 @@ class PlanTask(models.Model):
 
 	task = models.ManyToManyField(
 		Task,
-		verbose_name='задача',
+		through = 'PlanTaskOwner'
+		through_fields=('projectplan', 'task'),
+		verbose_name='задачи',
 	)
+
 	
-	
+class PlanTaskOwner(models.Model):
+
+
+	NEW = 0
+	INPROGRESS = 1
+	CANCEL = 2
+	COMPLETE =3
+	CLOSED = 4
+
+	TS_CHOICES = (
+		(PENDING, 'Ожидает исполнения'),
+		(INPROGRESS, 'В работе'),
+		(CANCEL, 'Отменена'),
+		(COMPLETE, 'Завершена'),
+	)
+
+	projectplan = models.ForeignKey(
+		ProjectPlan, 
+		on_delete=models.CASCADE
+	)
+	task = models.ForeignKey(
+		Task, 
+		on_delete=models.CASCADE
+	)
+
+	owner = models.ForeignKey(
+		User, 
+		on_delete=models.PROTECT
+	)
+
+	status = models.SmallIntegerField(
+		verbose_name='статус задачи',
+		choices=TS_CHOICES,
+		default=NEW,
+	)
