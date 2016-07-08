@@ -101,6 +101,8 @@ class ProjectPlan(models.Model):
 		verbose_name='задачи',
 	)
 
+	def __str__(self):
+		return self.plan +' '+ self.project
 	
 class PlanTaskOwner(models.Model):
 	class Meta:
