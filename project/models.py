@@ -125,19 +125,19 @@ class PlanTaskOwner(models.Model):
 
 	projectplan = models.ForeignKey(
 		ProjectPlan, 
-		verbose_name = 'проект плана'
-		on_delete=models.CASCADE
+		verbose_name = 'проект плана',
+		on_delete=models.CASCADE,
 	)
 	task = models.ForeignKey(
 		Task, 
-		verbose_name = 'задача'
-		on_delete=models.CASCADE
+		verbose_name = 'задача',
+		on_delete=models.CASCADE,
 	)
 
 	owner = models.ForeignKey(
 		User, 
-		verbose_name = 'ответственный'
-		on_delete=models.PROTECT
+		verbose_name = 'ответственный',
+		on_delete=models.PROTECT,
 	)
 
 	status = models.SmallIntegerField(
