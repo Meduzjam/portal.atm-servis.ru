@@ -12,7 +12,7 @@ class TaskAdmin(MPTTModelAdmin):
 
 class PlanTaskInline(admin.TabularInline):
 	model = PlanTask.task.through
-	extra = 0
+	extra = 10
 	min_num = 1
 	verbose_name = 'задача'
 	verbose_name_plural = 'задачи'
