@@ -33,10 +33,10 @@ class Task(MPTTModel):
 		null=True, 
 		blank=True, 
 		related_name='children', 
-		db_index=True)
-
-    
-    def __str__(self):
+		db_index=True
+	)
+	
+	def __str__(self):
 		return self.name
 
 class Plan(models.Model):
