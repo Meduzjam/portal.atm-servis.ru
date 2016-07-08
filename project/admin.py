@@ -8,10 +8,19 @@ class TaskAdmin(MPTTModelAdmin):
 
 class ProjectPlanTaskInline(admin.TabularInline):
 	model = ProjectPlan.task.through
-	extra = 10
+	extra = 0
 	min_num = 1
 	verbose_name = 'задача'
 	verbose_name_plural = 'задачи'
+
+
+class PlanProjectInline(admin.TabularInline):
+	model = ProjectPlan
+	extra = 0
+	min_num = 0
+	verbose_name = 'проект'
+	verbose_name_plural = 'проекты'
+
 
 class ProjectPlanAdmin(admin.ModelAdmin):
 	list_display = ("plan","project")
@@ -20,8 +29,16 @@ class ProjectPlanAdmin(admin.ModelAdmin):
 		ProjectPlanTaskInline,
 		]
 
+class PlanAdmin(admin.ModelAdmin):
+	list_display = ("year","department")
+
+	inlines = [
+		PlanProjectInline,
+		]
+
+
 
 admin.site.register(Project)
 admin.site.register(Task,TaskAdmin)
-admin.site.register(Plan)
+admin.site.register(Plan,PlanAdmin)
 admin.site.register(ProjectPlan,ProjectPlanAdmin)
