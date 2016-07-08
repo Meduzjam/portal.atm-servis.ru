@@ -112,10 +112,11 @@ class PlanTaskOwner(models.Model):
 	CLOSED = 4
 
 	TS_CHOICES = (
-		(PENDING, 'Ожидает исполнения'),
+		(NEW, 'Ожидает исполнения'),
 		(INPROGRESS, 'В работе'),
 		(CANCEL, 'Отменена'),
-		(COMPLETE, 'Завершена'),
+		(COMPLETE, 'Ожидает подтверждения'),
+		(CLOSED, 'Завершена'),
 	)
 
 	projectplan = models.ForeignKey(
