@@ -100,9 +100,6 @@ class ProjectPlan(models.Model):
 		through_fields=('projectplan', 'task'),
 		verbose_name='задачи',
 	)
-
-	def __str__(self):
-		return self.plan +' '+ self.project
 	
 class PlanTaskOwner(models.Model):
 	class Meta:
