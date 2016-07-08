@@ -96,7 +96,7 @@ class ProjectPlan(models.Model):
 
 	task = models.ManyToManyField(
 		Task,
-		through = 'PlanTaskOwner'
+		through = 'PlanTaskOwner',
 		through_fields=('projectplan', 'task'),
 		verbose_name='задачи',
 	)
