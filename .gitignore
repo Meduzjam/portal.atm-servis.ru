@@ -27,3 +27,6 @@ venv/
 
 # User-uploaded media
 media/
+
+# dev db
+*.sqlite3
