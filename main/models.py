@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import django_auth_ldap.backend
+import os
 
 class Profile(models.Model):
     """model to represent additional information about users"""
@@ -31,8 +31,7 @@ def update_profile(sender, user=None, ldap_user=None, **kwargs):
     except User.profile.RelatedObjectDoesNotExist:
         Profile.objects.create(user=user, title = title)
        
-
-
-
-# подвязываемся к сигналу бэкэнда ldap аутентификации
-django_auth_ldap.backend.populate_user.connect(update_profile)
+# подвязываемся к сигналу бэкэнда ldap аутентификации в продакшене
+if os.environ["DJANGO_SETTINGS_MODULE"]=='config.settings.production':
+    import django_auth_ldap.backend
+    django_auth_ldap.backend.populate_user.connect(update_profile)

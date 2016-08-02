@@ -1,6 +1,7 @@
 import os
 import environ
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = environ.Path(__file__) - 3
 env = environ.Env()
@@ -36,13 +37,10 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-
 
 ROOT_URLCONF = 'config.urls'
 
@@ -64,7 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 # DATABASE CONFIGURATION
@@ -82,7 +79,6 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 AUTH_PASSWORD_VALIDATORS = [
 
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -107,3 +103,4 @@ STATICFILES_DIRS = [
     str(BASE_DIR('static')),
     str(BASE_DIR('ng2')),
 ]
+
