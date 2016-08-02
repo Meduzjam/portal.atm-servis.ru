@@ -1,0 +1,4 @@
+# утсанавливаем базовые параметры
+-r base.txt
+
+django-debug-toolbar

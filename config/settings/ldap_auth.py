@@ -46,9 +46,9 @@ AUTH_LDAP_USER_ATTR_MAP = {
     "email": "mail"
 }
 # Указываем как переносить данные из AD в расширенный профиль пользователя Django
-AUTH_LDAP_PROFILE_ATTR_MAP = {
-    "title": "title"
-}
+#AUTH_LDAP_PROFILE_ATTR_MAP = {
+#    "title": "title"
+#}
 
 # Указываем привязку стандартных флагов is_active, is_staff и is_superuser к членству в группах AD
 # Флаг is_active при использовании django_remote_auth_ldap сам по себе не оказывает вляния на разрешение аутнтификации
