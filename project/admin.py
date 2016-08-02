@@ -36,8 +36,6 @@ class PlanAdmin(admin.ModelAdmin):
 		PlanProjectInline,
 		]
 
-
-
 admin.site.register(Project)
 admin.site.register(Task,TaskAdmin)
 admin.site.register(Plan,PlanAdmin)
