@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ProjectConfig(AppConfig):
-    name = 'project'
+class PlanConfig(AppConfig):
+    name = 'plan'
     verbose_name = "План работ"

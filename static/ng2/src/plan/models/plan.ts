@@ -1,18 +1,17 @@
 export class PlanModel {
 	constructor(
-		private Title: string,
-		private Type: string,
-		private id: number,
-		private File: string
+		public id: number,
+		public department: string,
+		public year: number
 		) {
 	}
 
 	static fromJSON(json: IPlanModel[]): PlanModel[] {
 		
 		return json.map(
-			function(el: IPlanModel) {
+			function(data: IPlanModel) {
 				let obj = Object.create(PlanModel.prototype);
-				Object.assign(obj, el);
+				Object.assign(obj, data);
 				return obj;
 			})
     }
@@ -24,8 +23,7 @@ export class PlanModel {
 }
 
 interface IPlanModel {
-	Title: string, 
-	Type: string,
 	id: number,
-	File: number
+	department: string, 
+	year: number,
 }

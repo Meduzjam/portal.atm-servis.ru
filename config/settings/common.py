@@ -27,8 +27,8 @@ INSTALLED_APPS = [
     'mptt',
     'tastypie',
     'main.apps.MainConfig',
-    'project.apps.ProjectConfig',
     'timesheet.apps.TimesheetConfig',
+    'plan.apps.PlanConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,6 +101,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = str(BASE_DIR('staticfiles'))
 STATICFILES_DIRS = [
     str(BASE_DIR('static')),
-    str(BASE_DIR('ng2')),
 ]
 

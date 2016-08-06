@@ -4,6 +4,7 @@ from .rest import *
 
 v1_api = Api(api_name='v1')
 v1_api.register(PlanResource())
+v1_api.register(ProjectPlanResource())
 
 
 urlpatterns = [

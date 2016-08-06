@@ -1,20 +1,20 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from '@angular/http';
-import { SertificateModel} from "../models/sertificate"
+import { PlanModel} from "../models/plan"
 
 import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class SertificatesService {
+export class PlanService {
     
-	private endpoint_url = 'http://127.0.0.1:8000/api/v1/sertificates/?format=json';
+	private endpoint_url = 'http://127.0.0.1:8000/api/v1/plan/?format=json';
 	
 	constructor(private http: Http) {
 
 	}
     
-	getSertificates(): Promise<SertificateModel[]> {
+	getPlans(): Promise<PlanModel[]> {
 		return this.http.get(this.endpoint_url)
 			.toPromise()
 			.then(this.extractData) 
@@ -22,7 +22,7 @@ export class SertificatesService {
 	}
 
 	private extractData(res: Response) {
-		return SertificateModel.fromJSON(res.json().objects) || {};
+		return PlanModel.fromJSON(res.json().objects) || {};
 	}
 
 	private handleError(error: any) {
