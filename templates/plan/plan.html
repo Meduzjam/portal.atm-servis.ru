@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <base href="/"/>
+    
     <app-plans>
         Загрузка...
     </app-plans>
@@ -24,8 +24,7 @@
     <!-- 2. Configure SystemJS -->
     <script src="{% static 'ng2/systemjs.config.js' %}"></script>
     <script>
-      System.import('app-plans').catch(function(err){ console.error(err); });
+      System.import('app-portal').catch(function(err){ console.error(err); });
     </script>
-
 
 {% endblock javascript %}

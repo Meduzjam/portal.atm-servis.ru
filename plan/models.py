@@ -78,8 +78,8 @@ class Plan(models.Model):
 class ProjectPlan(models.Model):
 	class Meta:
 		db_table = 'prj_project_plan'
-		verbose_name = 'плана проекта'
-		verbose_name_plural = 'плана проектов'
+		verbose_name = 'план проекта'
+		verbose_name_plural = 'план проектов'
 		unique_together = (('plan','project'),)
 
 	plan = models.ForeignKey(

@@ -9,5 +9,11 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['alluser'] = User.objects.all()
+        #context['alluser'] = User.objects.all()
         return context
+
+def index(request, path=''):
+    """
+    Renders the Angular2 SPA
+    """
+    return render(request, 'index.html')

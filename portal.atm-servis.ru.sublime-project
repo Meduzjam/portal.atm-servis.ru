@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+            "name": "Back-end",
+            "folder_exclude_patterns": ["static/ng2"],
+		},
+		{
+			"path": "./static/ng2/",
+            "name": "Front-end",
+            "file_exclude_patterns": ["app/*.js","app/*.js.map","*.md"],
+            "folder_exclude_patterns": ["typings","node_modules"],
+		}
+	],
+
+}

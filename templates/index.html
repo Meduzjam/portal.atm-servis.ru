@@ -1,38 +1,33 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en" >
+<html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Корпоративный портал ЗАО "АТМ-Сервис"</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-  </head>
+    <!-- Set the base href -->
+    <!-- <script>document.write('<base href="' + document.location + '" />');</script> -->
+    <title>Коропоративный портал ЗАО "АТМ-Сервис"</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'ng2/styles.css' %}">
 
-  <body>
-  <base href="/"/>
-
-  
-    🔑 {{user.first_name}} {{user.last_name}}
-   
-    <app-plans>
-        Загрузка...
-    </app-plans>
-
-    <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
     <script src="{% static 'ng2/node_modules/core-js/client/shim.min.js' %}"></script>
+
     <script src="{% static 'ng2/node_modules/zone.js/dist/zone.js' %}"></script>
     <script src="{% static 'ng2/node_modules/reflect-metadata/Reflect.js' %}"></script>
     <script src="{% static 'ng2/node_modules/systemjs/dist/system.src.js' %}"></script>
 
-    <!-- 2. Configure SystemJS -->
     <script src="{% static 'ng2/systemjs.config.js' %}"></script>
     <script>
-      System.import('app-plans').catch(function(err){ console.error(err); });
+      System.import('app')
+            .catch(function(err){ console.error(err); });
     </script>
 
+  </head>
+  <base href="/">
+  <body>
+    🔑 {{user.first_name}} {{user.last_name}}<br>
+    <portal-app>загрузка...</portal-app>
   </body>
+
 </html>
- 
