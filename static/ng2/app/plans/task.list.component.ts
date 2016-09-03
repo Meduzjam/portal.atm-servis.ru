@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { PlanService }  from './service';
-import { TaskModel } from './model';
+import { PlanProjectTaskModel } from './model';
 import { Subscription }       from 'rxjs/Subscription';
 
 @Component({
@@ -18,8 +18,8 @@ import { Subscription }       from 'rxjs/Subscription';
     <div style="background-color:red" *ngIf="error">{{error}}</div>
   `
 })
-export class PlanListComponent implements OnInit, OnDestroy {
-  tasks: TaskModel[];
+export class TaskListComponent implements OnInit, OnDestroy {
+  planProjectTasks: PlanProjectTaskModel[];
   error: string;
 
   private selectedId: number;
@@ -35,9 +35,9 @@ export class PlanListComponent implements OnInit, OnDestroy {
       .params
       .subscribe(params => {
         this.selectedId = +params['id'];
-        this.service.getPlans()
+        this.service.getPlanProjectTasks()
           .subscribe(
-            tasks => this.tasks = tasks,
+            planProjectTasks => this.planProjectTasks = planProjectTasks,
             error => this.error = error
             );
       });
@@ -47,9 +47,9 @@ export class PlanListComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  isSelected(plan: PlanModel) { return plan.id === this.selectedId; }
+  isSelected(planProjectTask: PlanProjectTaskModel) { return planProjectTask.id === this.selectedId; }
 
-  onSelect(plan: PlanModel) {
+  onSelect(plan: PlanProjectTaskModel) {
     this.router.navigate(['/plan', plan.id]);
   }
 

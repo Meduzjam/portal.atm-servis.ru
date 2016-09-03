@@ -20,9 +20,14 @@ var PlanDetailComponent = (function () {
     PlanDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
-            var id = +params['id']; // (+) converts string 'id' to a number
-            _this.service.getPlanProjects(id)
-                .subscribe(function (planProjects) { _this.planProjects = planProjects; console.dir(planProjects); });
+            var id = params['id']; // (+) converts string 'id' to a number
+            _this.service.getPlan(id)
+                .subscribe(function (plan) {
+                _this.plan = plan;
+                console.dir(_this.plan);
+                _this.service.getPlanProjects(_this.plan.projects)
+                    .subscribe(function (planProjects) { return _this.planProjects = planProjects; });
+            });
         });
     };
     PlanDetailComponent.prototype.ngOnDestroy = function () {
@@ -30,7 +35,7 @@ var PlanDetailComponent = (function () {
     };
     PlanDetailComponent = __decorate([
         core_1.Component({
-            template: "\n\n    <h2>\u041F\u0440\u043E\u0435\u043A\u0442\u044B \u043F\u043B\u0430\u043D\u04301</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProject of planProjects\">\n        <span class=\"badge\">{{planProject.id}}</span> {{planProject.project.name}}\n      </li>\n    </ul>\n    \n\n  "
+            template: "\n\n    <h2 *ngIf=plan>\u0414\u0435\u0442\u0430\u043B\u0438 \u043F\u043B\u0430\u043D\u0430 {{plan.Department()}} \u0437\u0430 {{plan.year}} \u0433\u043E\u0434</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProject of planProjects\">\n        <span class=\"badge\">{{planProject.id}}</span>{{planProject.project.name}} \n      </li>\n    </ul>\n    \n\n  "
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, service_1.PlanService])
     ], PlanDetailComponent);

@@ -18,16 +18,36 @@ require('rxjs/add/observable/throw');
 var PlanService = (function () {
     function PlanService(http) {
         this.http = http;
-        this.endpoint_url = "http://127.0.0.1:8000/api/v1";
+        this.endpoint_url = "http://127.0.0.1:8000";
     }
     PlanService.prototype.getPlans = function () {
-        return this.http.get(this.endpoint_url + '/plan/?format=json')
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        return this.http.get(this.endpoint_url + '/api/v1/plan', { search: parameters })
             .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) { return model_1.PlanModel.fromJSON(val); }); })
             .catch(this.handleError);
     };
-    PlanService.prototype.getPlanProjects = function (id) {
-        return this.http.get(this.endpoint_url + '/planprojects/?format=json&plan__id=' + +id)
+    PlanService.prototype.getPlan = function (id) {
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        return this.http.get(this.endpoint_url + '/api/v1/plan/' + id + '/', { search: parameters })
+            .map(function (res) { return model_1.PlanModel.fromJSON(res.json()); })
+            .catch(this.handleError);
+    };
+    PlanService.prototype.getPlanProjects = function (uri) {
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        // parameters.set('plan__id', id.toString());
+        return this.http.get(this.endpoint_url + uri, { search: parameters })
             .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) { return model_1.PlanProjectModel.fromJSON(val); }); })
+            .catch(this.handleError);
+    };
+    PlanService.prototype.getPlanProjectTasks = function (uri) {
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        // parameters.set('plan__id', id.toString());
+        return this.http.get(this.endpoint_url + uri, { search: parameters })
+            .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) { return model_1.PlanProjectTaskModel.fromJSON(val); }); })
             .catch(this.handleError);
     };
     PlanService.prototype.getPlanDetail = function (id) {

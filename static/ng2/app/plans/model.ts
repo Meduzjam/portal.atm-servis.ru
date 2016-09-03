@@ -2,7 +2,8 @@ export class PlanModel implements IPlanModel {
 	constructor(
 		public id: number,
 		public department: string,
-		public year: number
+		public year: number,
+		public projects: string
 		) {
 	}
 
@@ -22,6 +23,9 @@ export class PlanModel implements IPlanModel {
     		case "IM":
     			// code...
     			return "Отдел внедрения";
+    		case "DE":
+    			// code...
+    			return "Отдел проектирования";    			
     		default:
     			return "Хрензнает";
     	}
@@ -32,9 +36,9 @@ export class PlanModel implements IPlanModel {
 export class PlanProjectModel implements IPlanProjectModel{
 	constructor(
 		public id: number,
-		public plan: PlanModel,
+		public plan: string,
 		public project: ProjectModel,
-		// public task: TaskModel[]
+		public tasks: string
 		) {
 	}
 
@@ -43,7 +47,7 @@ export class PlanProjectModel implements IPlanProjectModel{
 		let obj = Object.create(PlanProjectModel.prototype);
 		Object.assign(obj, json);
 		obj.project = ProjectModel.fromJSON(json['project']);
-		obj.plan = PlanModel.fromJSON(json['plan']);
+		// obj.plan = PlanModel.fromJSON(json['plan']);
 		// obj.task = json['task'].map( (val) => TaskModel.fromJSON(val) );
 		return obj;
 
@@ -84,6 +88,58 @@ export class TaskModel implements ITaskModel{
 
 }
 
+export class UserModel implements IUserModel{
+	constructor(
+		public id: number,
+		public username: string, 
+		) {
+	}
+
+	static fromJSON(json: IUserModel): UserModel {
+		
+		let obj = Object.create(UserModel.prototype);
+		Object.assign(obj, json);
+		return obj;
+    }
+
+}
+
+export class PlanProjectTaskModel implements IPlanProjectTaskModel{
+	constructor(
+		public id: number,
+		public owner: UserModel,
+		public task: TaskModel,
+		public status: number,
+		public projectplan:string
+		) {
+	}
+
+	static fromJSON(json: IPlanProjectTaskModel): PlanProjectTaskModel {
+		
+		let obj = Object.create(PlanProjectTaskModel.prototype);
+		Object.assign(obj, json);
+		obj.owner = UserModel.fromJSON(json['owner']);
+		obj.task = TaskModel.fromJSON( json['task']);
+		return obj;
+
+    }
+}
+
+
+export interface IUserModel {
+	id: number,
+	username: string, 
+}
+
+export interface IPlanProjectTaskModel {
+	id: number,
+	owner: UserModel, 
+	task: TaskModel,
+	status:number,
+	projectplan:string
+}
+
+
 export interface IProjectModel {
 	id: number,
 	name: string, 
@@ -93,13 +149,14 @@ export interface IPlanModel {
 	id: number,
 	department: string, 
 	year: number,
+	projects: string,
 }
 
 export interface IPlanProjectModel {
 	id: number,
-	plan: PlanModel, 
+	plan: string, 
 	project: ProjectModel,
-	// task:TaskModel[]
+	tasks: string,
 }
 
 export interface ITaskModel {

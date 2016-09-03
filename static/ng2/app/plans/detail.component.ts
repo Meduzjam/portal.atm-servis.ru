@@ -2,16 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 
 import { PlanService }  from './service';
-import { PlanProjectModel } from './model';
+import { PlanProjectModel, PlanModel } from './model';
 import { Subscription }       from 'rxjs/Subscription';
 
 @Component({
   template: `
 
-    <h2>Проекты плана1</h2>
+    <h2 *ngIf=plan>Детали плана {{plan.Department()}} за {{plan.year}} год</h2>
     <ul class="items">
       <li *ngFor="let planProject of planProjects">
-        <span class="badge">{{planProject.id}}</span> {{planProject.project.name}}
+        <span class="badge">{{planProject.id}}</span>{{planProject.project.name}} 
       </li>
     </ul>
     
@@ -19,6 +19,7 @@ import { Subscription }       from 'rxjs/Subscription';
   `
 })
 export class PlanDetailComponent implements OnInit, OnDestroy  {
+  plan: PlanModel;
   planProjects: PlanProjectModel[];
 
   private sub: Subscription;
@@ -30,10 +31,15 @@ export class PlanDetailComponent implements OnInit, OnDestroy  {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       let id = +params['id']; // (+) converts string 'id' to a number
-       this.service.getPlanProjects(id)
+       let id = params['id']; // (+) converts string 'id' to a number
+       this.service.getPlan(id)
        // .then(plan => this.plan = plan);
-         .subscribe(planProjects => {this.planProjects = planProjects;console.dir(planProjects)});
+         .subscribe( plan => { 
+           this.plan = plan;
+           console.dir(this.plan);
+           this.service.getPlanProjects(this.plan.projects)
+             .subscribe( planProjects => this.planProjects = planProjects );
+          });
      });
   }
 

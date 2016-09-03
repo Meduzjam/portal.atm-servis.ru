@@ -1,6 +1,6 @@
 from django.conf.urls import url,include
 from tastypie.api import Api
-from .rest import *
+from .resources import *
 
 v1_api = Api(api_name='v1')
 v1_api.register(PlanResource())

@@ -17,6 +17,7 @@ class Project(models.Model):
 	def __str__(self):
 		return self.name	
 
+
 class Task(MPTTModel):
 	class Meta:
 		db_table = 'prj_task'

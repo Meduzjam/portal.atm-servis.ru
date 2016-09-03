@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"p",
+				"prototype	property"
+			],
+			[
+				"co",
+				"continue	keyword"
+			],
+			[
+				"a",
+				"assign	method"
+			],
+			[
 				"pr",
 				"prototype"
 			],
@@ -32,10 +44,6 @@
 				"return"
 			],
 			[
-				"a",
-				"arguments"
-			],
-			[
 				"ca",
 				"call"
 			],
@@ -62,10 +70,6 @@
 			[
 				"priv",
 				"private	keyword"
-			],
-			[
-				"co",
-				"constructor	keyword"
 			],
 			[
 				"Ob",
@@ -136,57 +140,11 @@
 	"buffers":
 	[
 		{
-			"file": "static/ng2/app/plans/detail.component.ts",
-			"settings":
-			{
-				"buffer_size": 1552,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "api/urls.py",
-			"settings":
-			{
-				"buffer_size": 322,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS\nfrom plan.models import Plan, Project, ProjectPlan, Task\nfrom tastypie.api import Api\nfrom tastypie import fields\nfrom tastypie.authentication import SessionAuthentication\n\n\n\n\nclass ProjectResource(ModelResource):\n	class Meta:\n		queryset = Project.objects.all()\n		resource_name = 'project'\n		fields = ['id','name']\n		allowed_methods = ['get']\n		include_resource_uri = False\n		authentication = SessionAuthentication()\n\n\nclass PlanResource(ModelResource):\n	class Meta:\n		queryset = Plan.objects.all()\n		resource_name = 'plan'\n		fields = ['id','department','year']\n		allowed_methods = ['get','post','put']\n		include_resource_uri = False\n		authentication = SessionAuthentication()\n		filtering = {\n			'id': ALL,\n			'year': ALL,\n			'department': ALL,\n		}\n\n	def dehydrate(self, bundle):\n		# bundle.data['http'] = bundle.obj;\n		return bundle;\n\nclass PlanProjectsResource(ModelResource):\n	# project = fields.ForeignKey(ProjectResource, 'project', full=True)\n	# plan = fields.ForeignKey(PlanResource, 'plan', full=True)\n	project = fields.ToOneField(ProjectResource, 'project', full=True)\n	plan = fields.ToOneField(PlanResource, 'plan', full=True)\n\n	class Meta:\n		queryset = ProjectPlan.objects.all()\n		resource_name = 'planprojects'\n		fields = ['id','plan','project']\n		#excludes = ['plan','project'];\n		allowed_methods = ['get']\n		include_resource_uri = False\n		authentication = SessionAuthentication()\n		filtering = {\n			'plan': ALL_WITH_RELATIONS,\n		}\n\n	def dehydrate(self, bundle):\n		return bundle\n\n\nclass TaskResource(ModelResource):\n	perent = fields.ForeignKey('self', 'parent', full=True, null=True)	\n	class Meta:\n		queryset = Task.objects.all()\n		resource_name = 'task'\n		fields = ['id','name','parent']\n		allowed_methods = ['get']\n		include_resource_uri = False\n		authentication = SessionAuthentication()\n\n\n\n\n#class SertificatesResource(ModelResource):\n	#Type = fields.ForeignKey(SertificateTypesResource, 'Type', full=True)\n#	class Meta:\n#		queryset = Sertificates.objects.all()\n#		resource_name = 'sertificates'\n#		fields = ['id','Title','Type','File']\n#		allowed_methods = ['get']\n#		include_resource_uri = False\n",
 			"file": "api/rest.py",
-			"file_size": 2259,
-			"file_write_time": 131166602264238009,
 			"settings":
 			{
-				"buffer_size": 2185,
+				"buffer_size": 2988,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "plan/models.py",
-			"settings":
-			{
-				"buffer_size": 2858,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "static/ng2/app/plans/model.ts",
-			"settings":
-			{
-				"buffer_size": 1600,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "import { Injectable } from '@angular/core';\nimport { Http, Response } from '@angular/http';\nimport { PlanModel,PlanProjectModel } from './model';\nimport { Observable }     from 'rxjs/Observable';\n\nimport 'rxjs/add/operator/catch';\nimport 'rxjs/add/operator/map';\nimport 'rxjs/add/observable/throw';\n\n@Injectable()\nexport class PlanService {\n\n  private endpoint_url = `http://127.0.0.1:8000/api/v1`;\n  \n  constructor(private http: Http) {\n\n  }\n    \n  getPlans():Observable<PlanModel[]> {\n    return this.http.get(this.endpoint_url+'/plan/?format=json')\n      .map( res => PlanModel.fromJSON(res.json().objects) ) \n      .catch(this.handleError);\n  }\n\n  getPlanProjects(id: number | string):Observable<PlanProjectModel[]> {\n    return this.http.get(this.endpoint_url+'/planprojects/?format=json&plan__id='+ +id)\n      .map( res => PlanProjectModel.fromJSON(res.json().objects) )\n      .catch(this.handleError);\n  }\n\n  getPlanDetail(id: number | string) {\n    return this.getPlans()\n      .map(plans => plans.find(plan => plan.id === +id));\n  }\n\n  private handleError(error: any) {\n      let errMsg = (error.message) ? error.message :\n      error.status ? `${error.status} - ${error.statusText}` : 'Server error';\n      console.error(errMsg); // log to console instead\n      return Observable.throw(errMsg);\n  }\n\n}\n\n\n/*\nCopyright 2016 Google Inc. All Rights Reserved.\nUse of this source code is governed by an MIT-style license that\ncan be found in the LICENSE file at http://angular.io/license\n*/",
-			"file": "static/ng2/app/plans/service.ts",
-			"file_size": 1495,
-			"file_write_time": 131165899359337644,
-			"settings":
-			{
-				"buffer_size": 1494,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -197,21 +155,25 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 334.0,
-		"last_filter": "Snippet: ",
+		"height": 81.0,
+		"last_filter": "git pull",
 		"selected_items":
 		[
-			[
-				"Snippet: ",
-				"Snippet: Prototype"
-			],
 			[
 				"git pull",
 				"Git: Pull"
 			],
 			[
+				"git pus",
+				"Git: Push"
+			],
+			[
 				"git st",
 				"Git: Status"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Prototype"
 			],
 			[
 				"git pu",
@@ -220,10 +182,6 @@
 			[
 				"git s",
 				"Git: Status"
-			],
-			[
-				"git pus",
-				"Git: Push"
 			],
 			[
 				"git sta",
@@ -318,7 +276,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 416.0
+		"width": 432.0
 	},
 	"console":
 	{
@@ -343,29 +301,33 @@
 	},
 	"expanded_folders":
 	[
+		"/D/Work/web/portal.atm-servis.ru",
 		"/D/Work/web/portal.atm-servis.ru/api",
 		"/D/Work/web/portal.atm-servis.ru/config",
-		"/D/Work/web/portal.atm-servis.ru/config/settings",
+		"/D/Work/web/portal.atm-servis.ru/main",
 		"/D/Work/web/portal.atm-servis.ru/plan",
-		"/D/Work/web/portal.atm-servis.ru/requirements",
-		"/D/Work/web/portal.atm-servis.ru/static",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans",
-		"/D/Work/web/portal.atm-servis.ru/templates"
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app"
 	],
 	"file_history":
 	[
-		"/D/Work/web/portal.atm-servis.ru/api/rest.py",
+		"/D/Work/web/portal.atm-servis.ru/plan/admin.py",
+		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
+		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
 		"/D/Work/web/portal.atm-servis.ru/config/urls.py",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/list.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/api/rest.py",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/service.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/model.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task.list.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/venv/Lib/site-packages/tastypie/api.py",
+		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.js",
+		"/D/Work/web/portal.atm-servis.ru/portal.atm-servis.ru.sublime-project",
 		"/D/Work/web/portal.atm-servis.ru/main/urls.py",
 		"/D/Work/web/portal.atm-servis.ru/main/views.py",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.routing.ts",
-		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/service.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/model.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/list.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.component.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/routing.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.module.ts",
@@ -379,7 +341,6 @@
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/tsconfig.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/package.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng3/typings.json",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.ts",
 		"/D/Work/web/ng2/app/app.routing.ts",
 		"/D/Work/web/ng2/app/plans/module.ts",
 		"/D/Work/web/ng2/app/app.component.ts",
@@ -445,7 +406,6 @@
 		"/D/Work/web/JavaScript/Задачки/1.html",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/components/plan-detail.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/components/projects.ts",
-		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/routers/routes.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/models/projects.ts",
 		"/D/Work/web/portal.atm-servis.ru/config/settings/common.py",
@@ -478,16 +438,11 @@
 		"/D/Work/web/atm_s_ru_project/atm_s_ru/main/apps.py",
 		"/D/Work/web/portal.atm-servis.ru/project/apps.py",
 		"/C/Users/MakarovAS/AppData/Local/Temp/scp20055/var/www/portal.atm-servis.ru/require.txt",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp04958/var/log/httpd/error_log",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp55028/var/www/example.com/require.txt",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp41205/var/www/portal.atm-servis.ru/venv/bin/activate.fish",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp39823/var/www/portal.atm-servis.ru/venv/bin/activate.csh",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp38605/var/www/portal.atm-servis.ru/venv/bin/activate",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp45849/var/www/portal.atm-servis.ru/venv/bin/python3.5"
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp04958/var/log/httpd/error_log"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -549,89 +504,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "static/ng2/app/plans/detail.component.ts",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1552,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								454,
-								454
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"use_tab_stops": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 114.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "api/urls.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 322,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								246,
-								246
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"typescript_plugin_format_options":
-							{
-								"convertTabsToSpaces": false,
-								"indentSize": 4,
-								"tabSize": 4
-							}
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "api/rest.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2185,
+						"buffer_size": 2988,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1876,
-								1876
+								1983,
+								1983
 							]
 						],
 						"settings":
@@ -640,105 +530,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 766.0,
+						"translation.y": 912.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "plan/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2858,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								609,
-								615
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "static/ng2/app/plans/model.ts",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1600,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								991,
-								991
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
-							"typescript_plugin_format_options":
-							{
-								"convertTabsToSpaces": false,
-								"indentSize": 4,
-								"tabSize": 4
-							},
-							"use_tab_stops": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 456.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "static/ng2/app/plans/service.ts",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1494,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1041,
-								1041
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"use_tab_stops": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 171.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
 					"type": "text"
 				}
 			]

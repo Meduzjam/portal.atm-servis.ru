@@ -1,9 +1,10 @@
 "use strict";
 var PlanModel = (function () {
-    function PlanModel(id, department, year) {
+    function PlanModel(id, department, year, projects) {
         this.id = id;
         this.department = department;
         this.year = year;
+        this.projects = projects;
     }
     PlanModel.fromJSON = function (json) {
         var obj = Object.create(PlanModel.prototype);
@@ -17,6 +18,9 @@ var PlanModel = (function () {
             case "IM":
                 // code...
                 return "Отдел внедрения";
+            case "DE":
+                // code...
+                return "Отдел проектирования";
             default:
                 return "Хрензнает";
         }
@@ -25,16 +29,17 @@ var PlanModel = (function () {
 }());
 exports.PlanModel = PlanModel;
 var PlanProjectModel = (function () {
-    function PlanProjectModel(id, plan, project) {
+    function PlanProjectModel(id, plan, project, tasks) {
         this.id = id;
         this.plan = plan;
         this.project = project;
+        this.tasks = tasks;
     }
     PlanProjectModel.fromJSON = function (json) {
         var obj = Object.create(PlanProjectModel.prototype);
         Object.assign(obj, json);
         obj.project = ProjectModel.fromJSON(json['project']);
-        obj.plan = PlanModel.fromJSON(json['plan']);
+        // obj.plan = PlanModel.fromJSON(json['plan']);
         // obj.task = json['task'].map( (val) => TaskModel.fromJSON(val) );
         return obj;
     };
@@ -68,4 +73,35 @@ var TaskModel = (function () {
     return TaskModel;
 }());
 exports.TaskModel = TaskModel;
+var UserModel = (function () {
+    function UserModel(id, username) {
+        this.id = id;
+        this.username = username;
+    }
+    UserModel.fromJSON = function (json) {
+        var obj = Object.create(UserModel.prototype);
+        Object.assign(obj, json);
+        return obj;
+    };
+    return UserModel;
+}());
+exports.UserModel = UserModel;
+var PlanProjectTaskModel = (function () {
+    function PlanProjectTaskModel(id, owner, task, status, projectplan) {
+        this.id = id;
+        this.owner = owner;
+        this.task = task;
+        this.status = status;
+        this.projectplan = projectplan;
+    }
+    PlanProjectTaskModel.fromJSON = function (json) {
+        var obj = Object.create(PlanProjectTaskModel.prototype);
+        Object.assign(obj, json);
+        obj.owner = UserModel.fromJSON(json['owner']);
+        obj.task = TaskModel.fromJSON(json['task']);
+        return obj;
+    };
+    return PlanProjectTaskModel;
+}());
+exports.PlanProjectTaskModel = PlanProjectTaskModel;
 //# sourceMappingURL=model.js.map
