@@ -2,23 +2,22 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { PlanService }  from './service';
-import { PlanProjectTaskModel } from './model';
+import { PlanProjectTaskModel, PlanProjectModel } from './model';
 import { Subscription }       from 'rxjs/Subscription';
 
 @Component({
   template: `
-    <h2>Задачи</h2>
+    <h2 *ngIf=planProject>Задачи плана для проекта {{planProject.project.name}}</h2>
     <ul class="items">
-      <li *ngFor="let plan of plans"
-        [class.selected]="isSelected(plan)"
-        (click)="onSelect(plan)">
-        <span class="badge">{{plan.id}}</span> {{plan.Department()}} {{plan.year}}
+      <li *ngFor="let planProjectTask of planProjectTasks">
+        <span class="badge">{{planProjectTask.id}}</span> {{planProjectTask.task.name}}, {{planProjectTask.Status()}}, {{planProjectTask.owner.username}}
       </li>
     </ul>
-    <div style="background-color:red" *ngIf="error">{{error}}</div>
+    <div style="color:red" *ngIf="error">{{error}}</div>
   `
 })
 export class TaskListComponent implements OnInit, OnDestroy {
+  planProject: PlanProjectModel;
   planProjectTasks: PlanProjectTaskModel[];
   error: string;
 
@@ -31,14 +30,16 @@ export class TaskListComponent implements OnInit, OnDestroy {
     private router: Router) {}
 
   ngOnInit() {
-    this.sub = this.route
-      .params
-      .subscribe(params => {
-        this.selectedId = +params['id'];
-        this.service.getPlanProjectTasks()
-          .subscribe(
-            planProjectTasks => this.planProjectTasks = planProjectTasks,
-            error => this.error = error
+    this.sub = this.route.params.subscribe(params => {
+      let id = params['id'];
+      this.service.getPlanProject(id)
+        .subscribe( planProject => {
+          this.planProject = planProject;
+          this.service.getPlanProjectTasks(this.planProject.tasks)
+             .subscribe( planProjectTasks => this.planProjectTasks = planProjectTasks
+               ,error => this.error = error);
+        },
+        error => this.error = error
             );
       });
   }
@@ -49,9 +50,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   isSelected(planProjectTask: PlanProjectTaskModel) { return planProjectTask.id === this.selectedId; }
 
-  onSelect(plan: PlanProjectTaskModel) {
+ /* onSelect(plan: PlanProjectTaskModel) {
     this.router.navigate(['/plan', plan.id]);
-  }
+  }*/
 
 }
 

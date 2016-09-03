@@ -14,6 +14,7 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var list_component_1 = require('./list.component');
 var detail_component_1 = require('./detail.component');
+var task_list_component_1 = require('./task.list.component');
 var service_1 = require('./service');
 var routing_1 = require('./routing');
 var PlansModule = (function () {
@@ -29,7 +30,8 @@ var PlansModule = (function () {
             ],
             declarations: [
                 list_component_1.PlanListComponent,
-                detail_component_1.PlanDetailComponent
+                detail_component_1.PlanDetailComponent,
+                task_list_component_1.TaskListComponent
             ],
             providers: [
                 service_1.PlanService

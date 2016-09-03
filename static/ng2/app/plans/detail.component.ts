@@ -10,18 +10,22 @@ import { Subscription }       from 'rxjs/Subscription';
 
     <h2 *ngIf=plan>Детали плана {{plan.Department()}} за {{plan.year}} год</h2>
     <ul class="items">
-      <li *ngFor="let planProject of planProjects">
+      <li *ngFor="let planProject of planProjects"
+      [class.selected]="isSelected(planProject)"
+        (click)="onSelect(planProject)">
         <span class="badge">{{planProject.id}}</span>{{planProject.project.name}} 
       </li>
     </ul>
-    
+    <div style="color:red" *ngIf="error">{{error}}</div>
 
   `
 })
 export class PlanDetailComponent implements OnInit, OnDestroy  {
   plan: PlanModel;
   planProjects: PlanProjectModel[];
+  error: string;
 
+  private selectedId: number;
   private sub: Subscription;
 
   constructor(
@@ -33,13 +37,13 @@ export class PlanDetailComponent implements OnInit, OnDestroy  {
     this.sub = this.route.params.subscribe(params => {
        let id = params['id']; // (+) converts string 'id' to a number
        this.service.getPlan(id)
-       // .then(plan => this.plan = plan);
          .subscribe( plan => { 
            this.plan = plan;
-           console.dir(this.plan);
            this.service.getPlanProjects(this.plan.projects)
-             .subscribe( planProjects => this.planProjects = planProjects );
-          });
+             .subscribe( planProjects => this.planProjects = planProjects
+             ,error => this.error = error );
+          },
+        error => this.error = error);
      });
   }
 
@@ -47,11 +51,12 @@ export class PlanDetailComponent implements OnInit, OnDestroy  {
     this.sub.unsubscribe();
   }
 
-/*  gotoPlans() {
-    let planId = this.plan ? this.plan.id : null;
-    // Pass along the hero id if available
-    // so that the HeroList component can select that hero.
-    this.router.navigate(['/plans', { id: planId, foo: 'foo' }]);*/
+  isSelected(planProject: PlanProjectModel) { return planProject.id === this.selectedId; }
+
+  onSelect(planProject: PlanProjectModel) {
+    this.router.navigate(['/planproject', planProject.id,'tasks']);
+  }
+
   
 }
 

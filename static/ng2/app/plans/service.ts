@@ -49,6 +49,16 @@ export class PlanService {
       .catch(this.handleError);
   }
 
+  getPlanProject(id: number | string):Observable<PlanProjectModel> {
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+
+    return this.http.get(this.endpoint_url+'/api/v1/planprojects/'+id+'/',{ search : parameters })
+      .map( res => PlanProjectModel.fromJSON( res.json() )
+      ) 
+      .catch(this.handleError);
+  }
+
   getPlanProjectTasks(uri: string):Observable<PlanProjectTaskModel[]> {
     let parameters = new URLSearchParams();
     parameters.set('format', 'json');

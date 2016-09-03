@@ -42,6 +42,13 @@ var PlanService = (function () {
             .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) { return model_1.PlanProjectModel.fromJSON(val); }); })
             .catch(this.handleError);
     };
+    PlanService.prototype.getPlanProject = function (id) {
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        return this.http.get(this.endpoint_url + '/api/v1/planprojects/' + id + '/', { search: parameters })
+            .map(function (res) { return model_1.PlanProjectModel.fromJSON(res.json()); })
+            .catch(this.handleError);
+    };
     PlanService.prototype.getPlanProjectTasks = function (uri) {
         var parameters = new http_1.URLSearchParams();
         parameters.set('format', 'json');

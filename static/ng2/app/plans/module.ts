@@ -5,6 +5,7 @@ import { HttpModule }     from '@angular/http';
 
 import { PlanListComponent }    from './list.component';
 import { PlanDetailComponent }  from './detail.component';
+import { TaskListComponent }  from './task.list.component';
 
 import { PlanService } from './service';
 
@@ -19,7 +20,8 @@ import { plansRouting } from './routing';
   ],
   declarations: [
     PlanListComponent,
-    PlanDetailComponent
+    PlanDetailComponent,
+    TaskListComponent
   ],
   providers: [
     PlanService

@@ -91,7 +91,7 @@ export class TaskModel implements ITaskModel{
 export class UserModel implements IUserModel{
 	constructor(
 		public id: number,
-		public username: string, 
+		public username: string
 		) {
 	}
 
@@ -123,6 +123,43 @@ export class PlanProjectTaskModel implements IPlanProjectTaskModel{
 		return obj;
 
     }
+
+	Status():string{
+
+	/*NEW = 0
+	INPROGRESS = 1
+	CANCEL = 2
+	COMPLETE =3
+	CLOSED = 4
+
+	TS_CHOICES = (
+		(NEW, 'Ожидает исполнения'),
+		(INPROGRESS, 'В работе'),
+		(CANCEL, 'Отменена'),
+		(COMPLETE, 'Ожидает подтверждения'),
+		(CLOSED, 'Завершена'),
+
+	*/
+    	switch (this.status) {
+    		case 0:
+    			return "Ожидает исполнения";
+    		case 1:
+    			// code...
+    			return "В работе";
+    		case 2:
+    			// code...
+    			return "Отменена";
+    		case 3:
+    			// code...
+    			return "Ожидает подтверждения";
+    		case 4:
+    			// code...
+    			return "Завершена";
+    		default:
+    			return "Не известно";
+    	}
+    }
+
 }
 
 

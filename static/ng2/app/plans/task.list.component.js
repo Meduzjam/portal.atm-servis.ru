@@ -19,24 +19,23 @@ var TaskListComponent = (function () {
     }
     TaskListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.sub = this.route
-            .params
-            .subscribe(function (params) {
-            _this.selectedId = +params['id'];
-            _this.service.getPlanProjectTasks()
-                .subscribe(function (planProjectTasks) { return _this.planProjectTasks = planProjectTasks; }, function (error) { return _this.error = error; });
+        this.sub = this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            _this.service.getPlanProject(id)
+                .subscribe(function (planProject) {
+                _this.planProject = planProject;
+                _this.service.getPlanProjectTasks(_this.planProject.tasks)
+                    .subscribe(function (planProjectTasks) { return _this.planProjectTasks = planProjectTasks; }, function (error) { return _this.error = error; });
+            }, function (error) { return _this.error = error; });
         });
     };
     TaskListComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
     TaskListComponent.prototype.isSelected = function (planProjectTask) { return planProjectTask.id === this.selectedId; };
-    TaskListComponent.prototype.onSelect = function (plan) {
-        this.router.navigate(['/plan', plan.id]);
-    };
     TaskListComponent = __decorate([
         core_1.Component({
-            template: "\n    <h2>\u0417\u0430\u0434\u0430\u0447\u0438</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let plan of plans\"\n        [class.selected]=\"isSelected(plan)\"\n        (click)=\"onSelect(plan)\">\n        <span class=\"badge\">{{plan.id}}</span> {{plan.Department()}} {{plan.year}}\n      </li>\n    </ul>\n    <div style=\"background-color:red\" *ngIf=\"error\">{{error}}</div>\n  "
+            template: "\n    <h2 *ngIf=planProject>\u0417\u0430\u0434\u0430\u0447\u0438 \u043F\u043B\u0430\u043D\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0435\u043A\u0442\u0430 {{planProject.project.name}}</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProjectTask of planProjectTasks\">\n        <span class=\"badge\">{{planProjectTask.id}}</span> {{planProjectTask.task.name}}, {{planProjectTask.Status()}}, {{planProjectTask.owner.username}}\n      </li>\n    </ul>\n    <div style=\"color:red\" *ngIf=\"error\">{{error}}</div>\n  "
         }), 
         __metadata('design:paramtypes', [service_1.PlanService, router_1.ActivatedRoute, router_1.Router])
     ], TaskListComponent);

@@ -4,18 +4,6 @@
 		"selected_items":
 		[
 			[
-				"p",
-				"prototype	property"
-			],
-			[
-				"co",
-				"continue	keyword"
-			],
-			[
-				"a",
-				"assign	method"
-			],
-			[
 				"pr",
 				"prototype"
 			],
@@ -44,6 +32,10 @@
 				"return"
 			],
 			[
+				"a",
+				"arguments"
+			],
+			[
 				"ca",
 				"call"
 			],
@@ -70,6 +62,10 @@
 			[
 				"priv",
 				"private	keyword"
+			],
+			[
+				"co",
+				"constructor	keyword"
 			],
 			[
 				"Ob",
@@ -140,11 +136,22 @@
 	"buffers":
 	[
 		{
-			"file": "api/rest.py",
+			"file": "api/urls.py",
 			"settings":
 			{
-				"buffer_size": 2988,
+				"buffer_size": 368,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Remote:   origin @ git@github.com:Meduzjam/portal.atm-servis.ru.git\nLocal:    master D:\\Work\\web\\portal.atm-servis.ru\nHead:     54a7aa2 в работе пока все еще\n\n\nNothing to commit (working directory clean)\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"settings":
+			{
+				"buffer_size": 965,
+				"line_ending": "Windows",
+				"name": "*git-status*: portal.atm-servis.ru",
+				"read_only": true,
+				"scratch": true
 			}
 		}
 	],
@@ -164,16 +171,8 @@
 				"Git: Pull"
 			],
 			[
-				"git pus",
-				"Git: Push"
-			],
-			[
 				"git st",
 				"Git: Status"
-			],
-			[
-				"Snippet: ",
-				"Snippet: Prototype"
 			],
 			[
 				"git pu",
@@ -182,6 +181,14 @@
 			[
 				"git s",
 				"Git: Status"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Prototype"
+			],
+			[
+				"git pus",
+				"Git: Push"
 			],
 			[
 				"git sta",
@@ -304,30 +311,27 @@
 		"/D/Work/web/portal.atm-servis.ru",
 		"/D/Work/web/portal.atm-servis.ru/api",
 		"/D/Work/web/portal.atm-servis.ru/config",
+		"/D/Work/web/portal.atm-servis.ru/config/settings",
 		"/D/Work/web/portal.atm-servis.ru/main",
-		"/D/Work/web/portal.atm-servis.ru/plan",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app"
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans"
 	],
 	"file_history":
 	[
-		"/D/Work/web/portal.atm-servis.ru/plan/admin.py",
-		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
-		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
-		"/D/Work/web/portal.atm-servis.ru/config/urls.py",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/list.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/api/rest.py",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/package.json",
+		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
+		"/D/Work/web/portal.atm-servis.ru/api/rest.py",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/service.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/model.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task.list.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/venv/Lib/site-packages/tastypie/api.py",
-		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.js",
-		"/D/Work/web/portal.atm-servis.ru/portal.atm-servis.ru.sublime-project",
+		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
+		"/D/Work/web/portal.atm-servis.ru/config/urls.py",
 		"/D/Work/web/portal.atm-servis.ru/main/urls.py",
 		"/D/Work/web/portal.atm-servis.ru/main/views.py",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.routing.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/list.component.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.component.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/routing.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.module.ts",
@@ -339,7 +343,6 @@
 		"/D/Work/web/portal.atm-servis.ru/static/ng3/tsconfig.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng3/systemjs.config.js",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/tsconfig.json",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/package.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng3/typings.json",
 		"/D/Work/web/ng2/app/app.routing.ts",
 		"/D/Work/web/ng2/app/plans/module.ts",
@@ -438,11 +441,16 @@
 		"/D/Work/web/atm_s_ru_project/atm_s_ru/main/apps.py",
 		"/D/Work/web/portal.atm-servis.ru/project/apps.py",
 		"/C/Users/MakarovAS/AppData/Local/Temp/scp20055/var/www/portal.atm-servis.ru/require.txt",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp04958/var/log/httpd/error_log"
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp04958/var/log/httpd/error_log",
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp55028/var/www/example.com/require.txt",
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp41205/var/www/portal.atm-servis.ru/venv/bin/activate.fish",
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp39823/var/www/portal.atm-servis.ru/venv/bin/activate.csh",
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp38605/var/www/portal.atm-servis.ru/venv/bin/activate",
+		"/C/Users/MakarovAS/AppData/Local/Temp/scp45849/var/www/portal.atm-servis.ru/venv/bin/python3.5"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 28.0
 	},
 	"find_in_files":
 	{
@@ -509,31 +517,64 @@
 			[
 				{
 					"buffer": 0,
-					"file": "api/rest.py",
+					"file": "api/urls.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2988,
+						"buffer_size": 368,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1983,
-								1983
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 912.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 965,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								160,
+								160
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"draw_white_space": "none",
+							"git_repo": "D:\\Work\\web\\portal.atm-servis.ru",
+							"git_status": true,
+							"git_view": "status",
+							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -541,7 +582,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -598,7 +639,7 @@
 	"project": "portal.atm-servis.ru.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":

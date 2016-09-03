@@ -24,18 +24,21 @@ var PlanDetailComponent = (function () {
             _this.service.getPlan(id)
                 .subscribe(function (plan) {
                 _this.plan = plan;
-                console.dir(_this.plan);
                 _this.service.getPlanProjects(_this.plan.projects)
-                    .subscribe(function (planProjects) { return _this.planProjects = planProjects; });
-            });
+                    .subscribe(function (planProjects) { return _this.planProjects = planProjects; }, function (error) { return _this.error = error; });
+            }, function (error) { return _this.error = error; });
         });
     };
     PlanDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
+    PlanDetailComponent.prototype.isSelected = function (planProject) { return planProject.id === this.selectedId; };
+    PlanDetailComponent.prototype.onSelect = function (planProject) {
+        this.router.navigate(['/planproject', planProject.id, 'tasks']);
+    };
     PlanDetailComponent = __decorate([
         core_1.Component({
-            template: "\n\n    <h2 *ngIf=plan>\u0414\u0435\u0442\u0430\u043B\u0438 \u043F\u043B\u0430\u043D\u0430 {{plan.Department()}} \u0437\u0430 {{plan.year}} \u0433\u043E\u0434</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProject of planProjects\">\n        <span class=\"badge\">{{planProject.id}}</span>{{planProject.project.name}} \n      </li>\n    </ul>\n    \n\n  "
+            template: "\n\n    <h2 *ngIf=plan>\u0414\u0435\u0442\u0430\u043B\u0438 \u043F\u043B\u0430\u043D\u0430 {{plan.Department()}} \u0437\u0430 {{plan.year}} \u0433\u043E\u0434</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProject of planProjects\"\n      [class.selected]=\"isSelected(planProject)\"\n        (click)=\"onSelect(planProject)\">\n        <span class=\"badge\">{{planProject.id}}</span>{{planProject.project.name}} \n      </li>\n    </ul>\n    <div style=\"color:red\" *ngIf=\"error\">{{error}}</div>\n\n  "
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, service_1.PlanService])
     ], PlanDetailComponent);

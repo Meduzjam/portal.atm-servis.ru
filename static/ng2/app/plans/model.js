@@ -101,6 +101,40 @@ var PlanProjectTaskModel = (function () {
         obj.task = TaskModel.fromJSON(json['task']);
         return obj;
     };
+    PlanProjectTaskModel.prototype.Status = function () {
+        /*NEW = 0
+        INPROGRESS = 1
+        CANCEL = 2
+        COMPLETE =3
+        CLOSED = 4
+    
+        TS_CHOICES = (
+            (NEW, 'Ожидает исполнения'),
+            (INPROGRESS, 'В работе'),
+            (CANCEL, 'Отменена'),
+            (COMPLETE, 'Ожидает подтверждения'),
+            (CLOSED, 'Завершена'),
+    
+        */
+        switch (this.status) {
+            case 0:
+                return "Ожидает исполнения";
+            case 1:
+                // code...
+                return "В работе";
+            case 2:
+                // code...
+                return "Отменена";
+            case 3:
+                // code...
+                return "Ожидает подтверждения";
+            case 4:
+                // code...
+                return "Завершена";
+            default:
+                return "Не известно";
+        }
+    };
     return PlanProjectTaskModel;
 }());
 exports.PlanProjectTaskModel = PlanProjectTaskModel;
