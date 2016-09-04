@@ -2,7 +2,7 @@
 var router_1 = require('@angular/router');
 var list_component_1 = require('./list.component');
 var detail_component_1 = require('./detail.component');
-var task_list_component_1 = require('./task.list.component');
+var task_list_component_1 = require('./task-list.component');
 var auth_guard_service_1 = require('../auth-guard.service');
 var plansRoutes = [
     {

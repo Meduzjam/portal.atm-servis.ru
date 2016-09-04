@@ -5,7 +5,7 @@ import { HttpModule }     from '@angular/http';
 
 import { PlanListComponent }    from './list.component';
 import { PlanDetailComponent }  from './detail.component';
-import { TaskListComponent }  from './task.list.component';
+import { TaskListComponent }  from './task-list.component';
 
 import { PlanService } from './service';
 
