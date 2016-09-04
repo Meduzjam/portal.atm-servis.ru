@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PlanListComponent }    from './list.component';
 import { PlanDetailComponent }  from './detail.component';
-import { TaskListComponent }  from './task-list.component';
+import { ProjectTaskListComponent }  from './project-task-list.component';
 import { AuthGuard }  from '../auth-guard.service';
 
 const plansRoutes: Routes = [
@@ -17,7 +17,7 @@ const plansRoutes: Routes = [
   },
   { 
     path: 'planproject/:id/tasks',
-    component: TaskListComponent,
+    component: ProjectTaskListComponent,
     canActivate: [AuthGuard]
   }
 ];

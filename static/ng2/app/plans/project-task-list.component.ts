@@ -16,7 +16,7 @@ import { Subscription }       from 'rxjs/Subscription';
     <div style="color:red" *ngIf="error">{{error}}</div>
   `
 })
-export class TaskListComponent implements OnInit, OnDestroy {
+export class ProjectTaskListComponent implements OnInit, OnDestroy {
   planProject: PlanProjectModel;
   planProjectTasks: PlanProjectTaskModel[];
   error: string;
