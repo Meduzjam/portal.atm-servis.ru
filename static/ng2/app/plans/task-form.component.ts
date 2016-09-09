@@ -3,17 +3,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription }       from 'rxjs/Subscription';
 
 import { PlanService }  from './service';
-import { PlanProjectTaskModel, PlanProjectModel } from './model';
+import { TaskModel } from './model';
 
 @Component({
-  selector: 'project-task-form',
+  selector: 'task-form',
   template: `
   	<form #myForm="ngForm" (ngSubmit)="onSubmit()">
 		
 			<div>
 				<label for=""></label>
 				<input type="text" id=""
-					[(ngModel)] = planProjectTask
+					[(ngModel)] = task
 				>
 			</div>
 
@@ -21,8 +21,8 @@ import { PlanProjectTaskModel, PlanProjectModel } from './model';
   `
 })
 export class HeroFormComponent implements OnInit, OnDestroy {
-	@Input() planProjectTask:PlanProjectTaskModel;
-  @Input() planProjectModel: PlanProjectModel;
+  task:TaskModel;
+  
 
   error: string;
 

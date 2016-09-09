@@ -8,13 +8,17 @@
     'app':                        'http://127.0.0.1:8000/static/ng2/app', // 'dist',
     '@angular':                   'http://127.0.0.1:8000/static/ng2/node_modules/@angular',
     'angular2-in-memory-web-api': 'http://127.0.0.1:8000/static/ng2/node_modules/angular2-in-memory-web-api',
-    'rxjs':                       'http://127.0.0.1:8000/static/ng2/node_modules/rxjs'
+    'rxjs':                       'http://127.0.0.1:8000/static/ng2/node_modules/rxjs',
+    'angular2-tree-component':    'node_modules/angular2-tree-component',
+    'lodash':                     'node_modules/lodash',
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+    'angular2-tree-component'   : { main: 'dist/angular2-tree-component.js', defaultExtension: 'js' },
+    'lodash'                    : { main: 'lodash.js', defaultExtension: 'js' },
   };
   var ngPackageNames = [
     'common',

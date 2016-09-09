@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var service_1 = require('./service');
-var model_1 = require('./model');
 var HeroFormComponent = (function () {
     function HeroFormComponent(service, route, router) {
         this.service = service;
@@ -44,22 +43,14 @@ var HeroFormComponent = (function () {
     HeroFormComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', model_1.PlanProjectTaskModel)
-    ], HeroFormComponent.prototype, "planProjectTask", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', model_1.PlanProjectModel)
-    ], HeroFormComponent.prototype, "planProjectModel", void 0);
     HeroFormComponent = __decorate([
         core_1.Component({
-            selector: 'project-task-form',
-            template: "\n  \t<form #myForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" id=\"\"\n\t\t\t\t\t[(ngModel)] = planProjectTask\n\t\t\t\t>\n\t\t\t</div>\n\n  \t</form>\n  "
+            selector: 'task-form',
+            template: "\n  \t<form #myForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" id=\"\"\n\t\t\t\t\t[(ngModel)] = task\n\t\t\t\t>\n\t\t\t</div>\n\n  \t</form>\n  "
         }), 
         __metadata('design:paramtypes', [service_1.PlanService, router_1.ActivatedRoute, router_1.Router])
     ], HeroFormComponent);
     return HeroFormComponent;
 }());
 exports.HeroFormComponent = HeroFormComponent;
-//# sourceMappingURL=project-task-form.component.js.map
+//# sourceMappingURL=task-form.component.js.map
