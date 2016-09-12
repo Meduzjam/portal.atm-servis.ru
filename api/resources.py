@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from tastypie.utils import trailing_slash
 from django.contrib.auth.models import User
 
+import logging
+
 class UserResource(ModelResource):
 	class Meta:
 		queryset = User.objects.all()
@@ -59,7 +61,8 @@ class PlanResource(ModelResource):
 		return bundle
 
 class TaskResource(ModelResource):
-	perent = fields.ForeignKey('self', 'parent', full=True, null=True)	
+	perent = fields.ForeignKey('self', 'parent', full=False, null=True)	
+
 	class Meta:
 		queryset = Task.objects.all()
 		resource_name = 'task'
@@ -68,8 +71,27 @@ class TaskResource(ModelResource):
 		include_resource_uri = False
 		authentication = SessionAuthentication()
 		filtering = {
-			'id': ALL,
+			'id': ALL_WITH_RELATIONS,
+			'parent': ALL_WITH_RELATIONS,
 		}
+
+	# get children task by ID
+	def get_children(self, request, **kwargs):
+		self.method_check(request, ['get', ])
+		return TaskResource().get_list(request, parent=kwargs['pk'])
+
+	def prepend_urls(self):
+		return [
+			url(r'^(?P<resource_name>%s)/(?P<pk>\w[\w/-]*)/children%s$' % (self._meta.resource_name, trailing_slash()),
+				self.wrap_view('get_children'),
+				name='api_get_children_for_task')
+			]
+
+	def dehydrate(self, bundle):
+		kwargs = dict(api_name='v1', resource_name=self._meta.resource_name, pk=bundle.data['id'])
+		bundle.data['children'] = reverse('api_get_children_for_task', kwargs=kwargs)
+		return bundle
+
 
 class PlanProjectsResource(ModelResource):
 	# project = fields.ForeignKey(ProjectResource, 'project', full=True)
@@ -103,7 +125,6 @@ class PlanProjectsResource(ModelResource):
 	def dehydrate(self, bundle):
 		kwargs = dict(api_name='v1', resource_name=self._meta.resource_name, pk=bundle.data['id'])
 		bundle.data['tasks'] = reverse('api_get_tasks_for_planproject', kwargs=kwargs)
-
 		return bundle
 
 class PlanTaskOwnerResource(ModelResource):
