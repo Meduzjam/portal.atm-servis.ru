@@ -9,48 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var service_1 = require('./service');
-var HeroFormComponent = (function () {
-    function HeroFormComponent(service, route, router) {
-        this.service = service;
-        this.route = route;
-        this.router = router;
-        this.powers = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
-        this.model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-        this.submitted = false;
-    }
-    HeroFormComponent.prototype.onSubmit = function () { this.submitted = true; };
-    Object.defineProperty(HeroFormComponent.prototype, "diagnostic", {
-        // TODO: Remove this when we're done
-        get: function () { return JSON.stringify(this.model); },
-        enumerable: true,
-        configurable: true
-    });
-    HeroFormComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.sub = this.route.params.subscribe(function (params) {
-            var id = params['id'];
-            _this.service.getPlanProject(id)
-                .subscribe(function (planProject) {
-                _this.planProject = planProject;
-                _this.service.getPlanProjectTasks(_this.planProject.tasks)
-                    .subscribe(function (planProjectTasks) { return _this.planProjectTasks = planProjectTasks; }, function (error) { return _this.error = error; });
-            }, function (error) { return _this.error = error; });
+var forms_1 = require('@angular/forms');
+var TaskFormComponent = (function () {
+    function TaskFormComponent(fb) {
+        this.myForm = fb.group({
+            'taskName': ['', forms_1.Validators.required]
         });
+    }
+    TaskFormComponent.prototype.onSubmit = function () {
     };
-    HeroFormComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe();
+    TaskFormComponent.prototype.ngOnInit = function () {
     };
-    HeroFormComponent = __decorate([
+    TaskFormComponent.prototype.ngOnDestroy = function () {
+    };
+    TaskFormComponent = __decorate([
         core_1.Component({
             selector: 'task-form',
-            template: "\n  \t<form #myForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" id=\"\"\n\t\t\t\t\t[(ngModel)] = task\n\t\t\t\t>\n\t\t\t</div>\n\n  \t</form>\n  "
+            inputs: ['task'],
+            template: "\n  \t<form [formGroup]=\"myForm\" \n          (ngSubmit)=\"onSubmit(myForm.value)\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" \n          id=\"taskNameInput\"\n          [formControl]=\"myForm.controls['taskName']\"\n\t\t\t\t\t[(ngModel)] = \"task.name\"\n\t\t\t\t>\n\t\t\t</div>\n      <button type=\"submit\">Submit</button>\n  \t</form>\n  "
         }), 
-        __metadata('design:paramtypes', [service_1.PlanService, router_1.ActivatedRoute, router_1.Router])
-    ], HeroFormComponent);
-    return HeroFormComponent;
+        __metadata('design:paramtypes', [forms_1.FormBuilder])
+    ], TaskFormComponent);
+    return TaskFormComponent;
 }());
-exports.HeroFormComponent = HeroFormComponent;
+exports.TaskFormComponent = TaskFormComponent;
 //# sourceMappingURL=task-form.component.js.map

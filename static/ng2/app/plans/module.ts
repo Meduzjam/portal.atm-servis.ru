@@ -1,11 +1,13 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, 
+         ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 
 import { PlanListComponent }    from './list.component';
 import { PlanDetailComponent }  from './detail.component';
 import { ProjectTaskListComponent }  from './project-task-list.component';
+import { TaskFormComponent }    from './task-form.component';
 
 import { PlanService } from './service';
 
@@ -16,12 +18,14 @@ import { plansRouting } from './routing';
     CommonModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     plansRouting
   ],
   declarations: [
     PlanListComponent,
     PlanDetailComponent,
-    ProjectTaskListComponent
+    ProjectTaskListComponent,
+    TaskFormComponent
   ],
   providers: [
     PlanService

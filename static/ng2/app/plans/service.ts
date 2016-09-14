@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response,URLSearchParams } from '@angular/http';
-import { PlanModel,PlanProjectModel,PlanProjectTaskModel } from './model';
+import { PlanModel, PlanProjectModel,PlanProjectTaskModel, TaskModel } from './model';
 import { Observable }     from 'rxjs/Observable';
 
 import 'rxjs/add/operator/catch';
@@ -71,6 +71,24 @@ export class PlanService {
       .catch(this.handleError);
   }
 
+  getTask(uri:string){
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+    // parameters.set('plan__id', id.toString());
+
+    return this.http.get(this.endpoint_url+uri,{ search : parameters })
+      .map( res => Array.prototype.map.call( res.json().objects,
+        (val) => { 
+            let task = TaskModel.fromJSON(val);
+            if(task.parent){
+              this.getTask(task.parent)
+            }
+              return task;
+
+          } ) 
+      ) 
+      .catch(this.handleError);
+  }
 
   getPlanDetail(id: number | string) {
     return this.getPlans()

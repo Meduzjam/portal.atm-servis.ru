@@ -57,6 +57,21 @@ var PlanService = (function () {
             .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) { return model_1.PlanProjectTaskModel.fromJSON(val); }); })
             .catch(this.handleError);
     };
+    PlanService.prototype.getTask = function (uri) {
+        var _this = this;
+        var parameters = new http_1.URLSearchParams();
+        parameters.set('format', 'json');
+        // parameters.set('plan__id', id.toString());
+        return this.http.get(this.endpoint_url + uri, { search: parameters })
+            .map(function (res) { return Array.prototype.map.call(res.json().objects, function (val) {
+            var task = model_1.TaskModel.fromJSON(val);
+            if (task.parent) {
+                _this.getTask(task.parent);
+            }
+            return task;
+        }); })
+            .catch(this.handleError);
+    };
     PlanService.prototype.getPlanDetail = function (id) {
         return this.getPlans()
             .map(function (plans) { return plans.find(function (plan) { return plan.id === +id; }); });

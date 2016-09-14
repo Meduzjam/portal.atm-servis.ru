@@ -7,8 +7,7 @@ from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from tastypie.utils import trailing_slash
 from django.contrib.auth.models import User
-
-import logging
+from django.forms.models import model_to_dict
 
 class UserResource(ModelResource):
 	class Meta:
@@ -62,6 +61,7 @@ class PlanResource(ModelResource):
 
 class TaskResource(ModelResource):
 	perent = fields.ForeignKey('self', 'parent', full=False, null=True)	
+	parent_id = fields.IntegerField(attribute='parent_id', null=True)
 
 	class Meta:
 		queryset = Task.objects.all()
@@ -73,12 +73,42 @@ class TaskResource(ModelResource):
 		filtering = {
 			'id': ALL_WITH_RELATIONS,
 			'parent': ALL_WITH_RELATIONS,
+			'parent_id': ALL_WITH_RELATIONS,
 		}
 
 	# get children task by ID
+	# def get_children(self, request, **kwargs):
+		
+	# 	self.method_check(request, allowed=['get'])
+	# 	self.is_authenticated(request)
+	# 	self.throttle_check(request)
+
+	# 	# Do the query.
+	# 	sqs = Task.objects.filter(parent_id=kwargs['pk'])
+	# 	paginator = Paginator(sqs, 20)
+
+	# 	try:
+	# 		page = paginator.page(int(request.GET.get('page', 1)))
+	# 	except InvalidPage:
+	# 		raise Http404("Sorry, no results on that page.")
+
+	# 	objects = []
+
+	# 	for result in page.object_list:
+	# 		bundle = self.build_bundle(obj=result.object, request=request)
+	# 		bundle = self.full_dehydrate(bundle)
+	# 		objects.append(bundle)
+
+	# 	object_list = {
+	# 		'objects': objects,
+	# 	}
+
+	# 	self.log_throttled_access(request)
+	# 	return self.create_response(request, object_list)
 	def get_children(self, request, **kwargs):
+		
 		self.method_check(request, ['get', ])
-		return TaskResource().get_list(request, parent=kwargs['pk'])
+		return TaskResource().get_list(request, parent_id=kwargs['pk'])
 
 	def prepend_urls(self):
 		return [

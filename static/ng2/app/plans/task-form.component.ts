@@ -1,67 +1,52 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription }       from 'rxjs/Subscription';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+  } from '@angular/forms';
 
-import { PlanService }  from './service';
 import { TaskModel } from './model';
 
 @Component({
   selector: 'task-form',
+  inputs:['task'],
   template: `
-  	<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  	<form [formGroup]="myForm" 
+          (ngSubmit)="onSubmit(myForm.value)">
 		
 			<div>
 				<label for=""></label>
-				<input type="text" id=""
-					[(ngModel)] = task
+				<input type="text" 
+          id="taskNameInput"
+          [formControl]="myForm.controls['taskName']"
+					[(ngModel)] = "task.name"
 				>
 			</div>
-
+      <button type="submit">Submit</button>
   	</form>
   `
 })
-export class HeroFormComponent implements OnInit, OnDestroy {
+export class TaskFormComponent implements OnInit, OnDestroy {
+  myForm: FormGroup;
+
   task:TaskModel;
   
-
-  error: string;
-
-  private sub: Subscription;
-
   constructor(
-    private service: PlanService,
-    private route: ActivatedRoute,
-    private router: Router) {}
+    fb: FormBuilder) {
 
-  powers = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
-  
-  model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      let id = params['id'];
-      this.service.getPlanProject(id)
-        .subscribe( planProject => {
-          this.planProject = planProject;
-          this.service.getPlanProjectTasks(this.planProject.tasks)
-             .subscribe( planProjectTasks => this.planProjectTasks = planProjectTasks
-               ,error => this.error = error);
-        },
-        error => this.error = error
-            );
+      this.myForm = fb.group({
+        'taskName': ['', Validators.required]
       });
   }
 
+  onSubmit() {
+  }
+
+
+  ngOnInit() {
+  }
+
   ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
 

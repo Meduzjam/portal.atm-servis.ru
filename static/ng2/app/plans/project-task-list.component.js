@@ -32,10 +32,15 @@ var ProjectTaskListComponent = (function () {
     ProjectTaskListComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
-    ProjectTaskListComponent.prototype.isSelected = function (planProjectTask) { return planProjectTask.id === this.selectedId; };
+    ProjectTaskListComponent.prototype.isSelected = function (planProjectTask) {
+        return planProjectTask === this.selectedPlanProjectTasks;
+    };
+    ProjectTaskListComponent.prototype.onSelect = function (planProjectTask) {
+        this.selectedPlanProjectTasks = planProjectTask;
+    };
     ProjectTaskListComponent = __decorate([
         core_1.Component({
-            template: "\n    <h2 *ngIf=planProject>\u0417\u0430\u0434\u0430\u0447\u0438 \u043F\u043B\u0430\u043D\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0435\u043A\u0442\u0430 {{planProject.project.name}}</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProjectTask of planProjectTasks\">\n        <span class=\"badge\">{{planProjectTask.id}}</span> {{planProjectTask.task.name}}, {{planProjectTask.Status()}}, {{planProjectTask.owner.username}}\n      </li>\n    </ul>\n    <div style=\"color:red\" *ngIf=\"error\">{{error}}</div>\n  "
+            template: "\n    <h2 *ngIf=planProject>\u0417\u0430\u0434\u0430\u0447\u0438 \u043F\u043B\u0430\u043D\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0435\u043A\u0442\u0430 {{planProject.project.name}}</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let planProjectTask of planProjectTasks\"  \n        (click)=\"onSelect(planProjectTask)\"\n        [class.selected]=\"isSelected(planProjectTask)\">\n        <span class=\"badge\">{{planProjectTask.id}}</span> {{planProjectTask.task.name}}, {{planProjectTask.Status()}}, {{planProjectTask.owner.username}}\n      </li>\n    </ul>\n    \n    <div *ngIf=selectedPlanProjectTasks>\n      <task-form [task]=\"selectedPlanProjectTasks.task\"></task-form>\n    </div>\n\n    <div style=\"color:red\" *ngIf=\"error\">{{error}}</div>\n\n\n  "
         }), 
         __metadata('design:paramtypes', [service_1.PlanService, router_1.ActivatedRoute, router_1.Router])
     ], ProjectTaskListComponent);

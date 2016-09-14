@@ -4,25 +4,33 @@ import { Subscription }  from 'rxjs/Subscription';
 
 import { PlanService }  from './service';
 import { PlanProjectTaskModel, PlanProjectModel } from './model';
-
+import { TaskFormComponent }    from './task-form.component';
 
 @Component({
   template: `
     <h2 *ngIf=planProject>Задачи плана для проекта {{planProject.project.name}}</h2>
     <ul class="items">
-      <li *ngFor="let planProjectTask of planProjectTasks">
+      <li *ngFor="let planProjectTask of planProjectTasks"  
+        (click)="onSelect(planProjectTask)"
+        [class.selected]="isSelected(planProjectTask)">
         <span class="badge">{{planProjectTask.id}}</span> {{planProjectTask.task.name}}, {{planProjectTask.Status()}}, {{planProjectTask.owner.username}}
       </li>
     </ul>
+    
+    <div *ngIf=selectedPlanProjectTasks>
+      <task-form [task]="selectedPlanProjectTasks.task"></task-form>
+    </div>
+
     <div style="color:red" *ngIf="error">{{error}}</div>
+
+
   `
 })
 export class ProjectTaskListComponent implements OnInit, OnDestroy {
   planProject: PlanProjectModel;
   planProjectTasks: PlanProjectTaskModel[];
-  error: string;
-
-  private selectedId: number;
+  private selectedPlanProjectTasks: PlanProjectTaskModel;
+  private error: string;
   private sub: Subscription;
 
   constructor(
@@ -49,11 +57,13 @@ export class ProjectTaskListComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  isSelected(planProjectTask: PlanProjectTaskModel) { return planProjectTask.id === this.selectedId; }
+  isSelected(planProjectTask: PlanProjectTaskModel) { 
+    return planProjectTask === this.selectedPlanProjectTasks; 
+  }
 
- /* onSelect(plan: PlanProjectTaskModel) {
-    this.router.navigate(['/plan', plan.id]);
-  }*/
+  onSelect(planProjectTask: PlanProjectTaskModel) {
+    this.selectedPlanProjectTasks = planProjectTask;
+  }
 
 }
 
