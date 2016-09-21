@@ -18,6 +18,7 @@ var project_task_list_component_1 = require('./project-task-list.component');
 var task_form_component_1 = require('./task-form.component');
 var service_1 = require('./service');
 var routing_1 = require('./routing');
+var reducer_1 = require('./reducer');
 var PlansModule = (function () {
     function PlansModule() {
     }
@@ -28,7 +29,8 @@ var PlansModule = (function () {
                 http_1.HttpModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
-                routing_1.plansRouting
+                routing_1.plansRouting,
+                reducer_1.STORE
             ],
             declarations: [
                 list_component_1.PlanListComponent,

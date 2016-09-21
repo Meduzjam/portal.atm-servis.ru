@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response,URLSearchParams } from '@angular/http';
-import { PlanModel, PlanProjectModel,PlanProjectTaskModel, TaskModel } from './model';
 import { Observable }     from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
+import { PlanModel, PlanProjectModel,PlanProjectTaskModel, TaskModel } from './model';
+import { PlansState } from './state';
+import * as Actions from './actions';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,13 +14,39 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class PlanService {
 
+  plans: Observable<Array<PlanModel>>;
+
   private endpoint_url = `http://127.0.0.1:8000`;
   
-  constructor(private http: Http) {
+
+
+  constructor(private http: Http, 
+              private store: Store<PlansState>) {
+
+    this.plans = store.select('plans');
 
   }
+
+  getPlans() {
+    const api = '/api/v1/plan';
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+
+    this.http.get(this.endpoint_url + api, { search : parameters })
+      .map(res => Array.prototype.map.call( res.json().objects),
+        (val) => PlanModel.fromJSON(val))
+      .map(payload => Actions.addPlans(payload)  )
+      .subscribe(action => this.store.dispatch(action));
+
+/*      .map(res => res.json())
+      .map(payload => ({ type: 'ADD_ITEMS', payload }))
+      .subscribe(action => this.store.dispatch(action));*/
+
+  }
+
+
     
-  getPlans():Observable<PlanModel[]> {
+/*  getPlans():Observable<PlanModel[]> {
     let parameters = new URLSearchParams();
     parameters.set('format', 'json');
 
@@ -25,7 +55,7 @@ export class PlanService {
         (val) => PlanModel.fromJSON(val) ) 
       ) 
       .catch(this.handleError);
-  }
+  }*/
 
   getPlan(id: number | string):Observable<PlanModel> {
     let parameters = new URLSearchParams();
@@ -71,29 +101,10 @@ export class PlanService {
       .catch(this.handleError);
   }
 
-  getTask(uri:string){
-    let parameters = new URLSearchParams();
-    parameters.set('format', 'json');
-    // parameters.set('plan__id', id.toString());
-
-    return this.http.get(this.endpoint_url+uri,{ search : parameters })
-      .map( res => Array.prototype.map.call( res.json().objects,
-        (val) => { 
-            let task = TaskModel.fromJSON(val);
-            if(task.parent){
-              this.getTask(task.parent)
-            }
-              return task;
-
-          } ) 
-      ) 
-      .catch(this.handleError);
-  }
-
-  getPlanDetail(id: number | string) {
+  /*getPlanDetail(id: number | string) {
     return this.getPlans()
       .map(plans => plans.find(plan => plan.id === +id));
-  }
+  }*/
 
 
   private handleError(error: any) {

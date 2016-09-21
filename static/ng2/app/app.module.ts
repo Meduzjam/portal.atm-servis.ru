@@ -1,4 +1,5 @@
 import { NgModule }       from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 
@@ -9,6 +10,7 @@ import { routing,
 import { PlansModule } from './plans/module';
 import { AuthGuard }  from './auth-guard.service';
 
+import { STORE } from './app.reducer';
 // import { LoginComponent } from './login.component';
 
 // import { DialogService }  from './dialog.service';
@@ -18,7 +20,8 @@ import { AuthGuard }  from './auth-guard.service';
     BrowserModule,
     //FormsModule,
     routing,
-    PlansModule
+    PlansModule,
+    STORE
   ],
   declarations: [
     AppComponent,
@@ -27,6 +30,7 @@ import { AuthGuard }  from './auth-guard.service';
   providers: [
     appRoutingProviders,
     AuthGuard,
+    { provide: APP_BASE_HREF, useValue: '/' },
     // DialogService
   ],
   bootstrap: [ AppComponent ]

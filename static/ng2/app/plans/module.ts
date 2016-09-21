@@ -13,13 +13,16 @@ import { PlanService } from './service';
 
 import { plansRouting } from './routing';
 
+import { STORE } from './reducer';
+
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    plansRouting
+    plansRouting,
+    STORE
   ],
   declarations: [
     PlanListComponent,

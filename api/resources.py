@@ -120,6 +120,9 @@ class TaskResource(ModelResource):
 	def dehydrate(self, bundle):
 		kwargs = dict(api_name='v1', resource_name=self._meta.resource_name, pk=bundle.data['id'])
 		bundle.data['children'] = reverse('api_get_children_for_task', kwargs=kwargs)
+		# bundle.data['user'] = bundle.request.user
+		# bundle.data['user_id'] = bundle.request.user.id
+		# bundle.data['user_fname'] = bundle.request.user.first_name
 		return bundle
 
 

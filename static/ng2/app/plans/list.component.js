@@ -10,12 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var store_1 = require('@ngrx/store');
 var service_1 = require('./service');
 var PlanListComponent = (function () {
-    function PlanListComponent(service, route, router) {
+    function PlanListComponent(service, store, route, router) {
         this.service = service;
+        this.store = store;
         this.route = route;
         this.router = router;
+        this.plans = service.plans;
+        this.selectedPlan = store.select('selectedPlan');
+        this.service.getPlans();
     }
     PlanListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -23,9 +28,13 @@ var PlanListComponent = (function () {
             .params
             .subscribe(function (params) {
             _this.selectedId = +params['id'];
-            _this.service.getPlans()
-                .subscribe(function (plans) { return _this.plans = plans; }, function (error) { return _this.error = error; });
-        });
+            /*        this.service.getPlans()
+                      // .then(plans => this.plans = plans);
+                      .subscribe(
+                        plans => this.plans = plans,
+                        error => this.error = error
+                        );
+            */ });
     };
     PlanListComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -36,9 +45,9 @@ var PlanListComponent = (function () {
     };
     PlanListComponent = __decorate([
         core_1.Component({
-            template: "\n    <h2>\u041F\u043B\u0430\u043D\u044B</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let plan of plans\"\n        [class.selected]=\"isSelected(plan)\"\n        (click)=\"onSelect(plan)\">\n        <span class=\"badge\">{{plan.id}}</span> {{plan.Department()}} {{plan.year}}\n      </li>\n    </ul>\n    <div style=\"background-color:red\" *ngIf=\"error\">{{error}}</div>\n  "
+            template: "\n    <h2>\u041F\u043B\u0430\u043D\u044B</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let plan of plan | async\"\n        [class.selected]=\"isSelected(plan)\"\n        (click)=\"onSelect(plan)\">\n        <span class=\"badge\">{{plan.id}}</span> {{plan.Department()}} {{plan.year}}\n      </li>\n    </ul>\n    <div style=\"background-color:red\" *ngIf=\"error\">{{error}}</div>\n  "
         }), 
-        __metadata('design:paramtypes', [service_1.PlanService, router_1.ActivatedRoute, router_1.Router])
+        __metadata('design:paramtypes', [service_1.PlanService, store_1.Store, router_1.ActivatedRoute, router_1.Router])
     ], PlanListComponent);
     return PlanListComponent;
 }());

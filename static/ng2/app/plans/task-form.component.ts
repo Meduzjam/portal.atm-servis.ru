@@ -19,7 +19,7 @@ import { TaskModel } from './model';
 				<input type="text" 
           id="taskNameInput"
           [formControl]="myForm.controls['taskName']"
-					[(ngModel)] = "task.name"
+					[ngModel] = "task.name"
 				>
 			</div>
       <button type="submit">Submit</button>

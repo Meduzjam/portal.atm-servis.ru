@@ -1,15 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable }     from 'rxjs/Observable';
+import { Subscription }       from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
 
 import { PlanService }  from './service';
 import { PlanModel } from './model';
-import { Subscription }       from 'rxjs/Subscription';
+import { PlansState } from './state';
+
 
 @Component({
   template: `
     <h2>Планы</h2>
     <ul class="items">
-      <li *ngFor="let plan of plans"
+      <li *ngFor="let plan of plan | async"
         [class.selected]="isSelected(plan)"
         (click)="onSelect(plan)">
         <span class="badge">{{plan.id}}</span> {{plan.Department()}} {{plan.year}}
@@ -19,7 +23,10 @@ import { Subscription }       from 'rxjs/Subscription';
   `
 })
 export class PlanListComponent implements OnInit, OnDestroy {
-  plans: PlanModel[];
+
+  plans: Observable<Array<PlanModel>>;
+  selectedPlan: Observable<PlanModel>;
+
   error: string;
 
   private selectedId: number;
@@ -27,21 +34,31 @@ export class PlanListComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: PlanService,
+    private store: Store<PlansState>,
     private route: ActivatedRoute,
-    private router: Router) {}
+    private router: Router) {
+
+    this.plans = service.plans;
+    this.selectedPlan = store.select('selectedPlan');
+    this.service.getPlans();
+
+  }
 
   ngOnInit() {
+
+
+
     this.sub = this.route
       .params
       .subscribe(params => {
         this.selectedId = +params['id'];
-        this.service.getPlans()
+/*        this.service.getPlans()
           // .then(plans => this.plans = plans);
           .subscribe(
             plans => this.plans = plans,
             error => this.error = error
             );
-      });
+*/      });
   }
 
   ngOnDestroy() {

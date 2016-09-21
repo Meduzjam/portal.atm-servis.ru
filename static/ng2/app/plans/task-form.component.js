@@ -26,7 +26,7 @@ var TaskFormComponent = (function () {
         core_1.Component({
             selector: 'task-form',
             inputs: ['task'],
-            template: "\n  \t<form [formGroup]=\"myForm\" \n          (ngSubmit)=\"onSubmit(myForm.value)\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" \n          id=\"taskNameInput\"\n          [formControl]=\"myForm.controls['taskName']\"\n\t\t\t\t\t[(ngModel)] = \"task.name\"\n\t\t\t\t>\n\t\t\t</div>\n      <button type=\"submit\">Submit</button>\n  \t</form>\n  "
+            template: "\n  \t<form [formGroup]=\"myForm\" \n          (ngSubmit)=\"onSubmit(myForm.value)\">\n\t\t\n\t\t\t<div>\n\t\t\t\t<label for=\"\"></label>\n\t\t\t\t<input type=\"text\" \n          id=\"taskNameInput\"\n          [formControl]=\"myForm.controls['taskName']\"\n\t\t\t\t\t[ngModel] = \"task.name\"\n\t\t\t\t>\n\t\t\t</div>\n      <button type=\"submit\">Submit</button>\n  \t</form>\n  "
         }), 
         __metadata('design:paramtypes', [forms_1.FormBuilder])
     ], TaskFormComponent);

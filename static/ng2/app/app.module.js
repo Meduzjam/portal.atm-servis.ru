@@ -9,11 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var app_routing_1 = require('./app.routing');
 var module_1 = require('./plans/module');
 var auth_guard_service_1 = require('./auth-guard.service');
+var app_reducer_1 = require('./app.reducer');
 // import { LoginComponent } from './login.component';
 // import { DialogService }  from './dialog.service';
 var AppModule = (function () {
@@ -25,7 +27,8 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 //FormsModule,
                 app_routing_1.routing,
-                module_1.PlansModule
+                module_1.PlansModule,
+                app_reducer_1.STORE
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -33,6 +36,7 @@ var AppModule = (function () {
             providers: [
                 app_routing_1.appRoutingProviders,
                 auth_guard_service_1.AuthGuard,
+                { provide: common_1.APP_BASE_HREF, useValue: '/' },
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

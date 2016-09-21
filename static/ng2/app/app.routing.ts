@@ -1,4 +1,5 @@
 import { Routes, RouterModule }   from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 
 /*import { loginRoutes,
          authProviders }  from './login.routing';*/
@@ -27,7 +28,7 @@ export const appRoutingProviders: any[] = [
   //CanDeactivateGuard
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
 
 /*
