@@ -4,20 +4,24 @@
 		"selected_items":
 		[
 			[
+				"co",
+				"Console\tinterface"
+			],
+			[
+				"S",
+				"SELECT_PLAN\tconst"
+			],
+			[
 				"stat",
-				"status	var"
+				"status\tvar"
 			],
 			[
 				"p",
-				"prototype	property"
-			],
-			[
-				"co",
-				"continue	keyword"
+				"prototype\tproperty"
 			],
 			[
 				"a",
-				"assign	method"
+				"assign\tmethod"
 			],
 			[
 				"pr",
@@ -73,23 +77,19 @@
 			],
 			[
 				"priv",
-				"private	keyword"
+				"private\tkeyword"
 			],
 			[
 				"Ob",
-				"Object	interface"
+				"Object\tinterface"
 			],
 			[
 				"str",
-				"string	keyword"
+				"string\tkeyword"
 			],
 			[
 				"nu",
-				"number	keyword"
-			],
-			[
-				"S",
-				"Sertificates"
+				"number\tkeyword"
 			],
 			[
 				"T",
@@ -97,11 +97,11 @@
 			],
 			[
 				"Custom",
-				"CustomerModel	alias"
+				"CustomerModel\talias"
 			],
 			[
 				"impo",
-				"import	imports a module …"
+				"import\timports a module …"
 			],
 			[
 				"padd",
@@ -144,29 +144,10 @@
 	"buffers":
 	[
 		{
-			"contents": "import { Component } from '@angular/core';\nimport { TreeComponent } from 'angular2-tree-component';\n\n@Component({\n  selector: 'task-list',\n  directives: [TreeComponent],\n  template: '<Tree [nodes]=\"nodes\"></Tree>'\n});\n\nexport class App {\n  nodes = [\n    {\n      id: 1,\n      name: 'root1',\n      children: [\n        { id: 2, name: 'child1' },\n        { id: 3, name: 'child2' }\n      ]\n    },\n    {\n      id: 4,\n      name: 'root2',\n      children: [\n        { id: 5, name: 'child2.1' },\n        {\n          id: 6,\n          name: 'child2.2',\n          children: [\n            { id: 7, name: 'subsub' }\n          ]\n        }\n      ]\n    }\n  ];\n}",
-			"file": "static/ng2/app/plans/task-list.component.ts",
-			"file_size": 0,
-			"file_write_time": 131181253891173755,
+			"file": "static/ng2/src/main.js",
 			"settings":
 			{
-				"buffer_size": 644,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "api/resources.py",
-			"settings":
-			{
-				"buffer_size": 5322,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "plan/models.py",
-			"settings":
-			{
-				"buffer_size": 2859,
+				"buffer_size": 444,
 				"line_ending": "Windows"
 			}
 		}
@@ -178,17 +159,29 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 81.0,
-		"last_filter": "git pull",
+		"height": 127.0,
+		"last_filter": "git push",
 		"selected_items":
 		[
 			[
-				"git pull",
-				"Git: Pull"
+				"git push",
+				"Git: Push"
 			],
 			[
 				"git sta",
-				"Git: Apply Stash"
+				"Git: Status"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git pull",
+				"Git: Pull"
 			],
 			[
 				"git pu",
@@ -215,10 +208,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"git push",
-				"Git: Push"
-			],
-			[
 				"git c",
 				"Git: Commit"
 			],
@@ -237,10 +226,6 @@
 			[
 				"git di",
 				"Git: Diff Current File"
-			],
-			[
-				"git stat",
-				"Git: Status"
 			],
 			[
 				"git ",
@@ -324,43 +309,62 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Work/web/portal.atm-servis.ru",
-		"/D/Work/web/portal.atm-servis.ru/api",
-		"/D/Work/web/portal.atm-servis.ru/config",
-		"/D/Work/web/portal.atm-servis.ru/plan",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/res"
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/src"
 	],
 	"file_history":
 	[
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/project-task-list.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/routing.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task-form.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/systemjs.config.js",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/package.json",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/project-task-form.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/service.ts",
+		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
+		"/D/Work/web/portal.atm-servis.ru/main/admin.py",
+		"/D/Work/web/portal.atm-servis.ru/main/models.py",
 		"/D/Work/web/portal.atm-servis.ru/api/resources.py",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/components/department-detail.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/components/department-list.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/systemjs.config.js",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/actions/plan.ts",
+		"/D/Work/web/portal.atm-servis.ru/api/urls.py",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/models/index.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/components/index.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/module.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/util.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.reducer.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/reducer.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.module.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/list.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/state.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.state.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/actions.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/service.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.component.ts",
+		"/D/Downloads/list.component (1).ts",
+		"/D/Downloads/detail.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/node_modules/@ngrx/store/index.js",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/package.json",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/typings.json",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/node_modules/@ngrx/store/src/reducer.d.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/main.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.store.ts",
+		"/D/Work/web/ng2book/ng-book-code/redux/angular2-redux-chat/minimal/counter-action-creators.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task-form.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.routing.ts",
+		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task-list.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/node_modules/@angular/http/bundles/http.umd.js",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/node_modules/@angular/http/src/http_module.d.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/project-task-list.component.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/model.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/routing.ts",
+		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/project-task-form.component.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/task.list.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/model.ts",
 		"/D/Work/web/portal.atm-servis.ru/plan/admin.py",
-		"/D/Work/web/portal.atm-servis.ru/plan/models.py",
 		"/D/Work/web/portal.atm-servis.ru/config/urls.py",
 		"/D/Work/web/portal.atm-servis.ru/api/rest.py",
 		"/D/Work/web/portal.atm-servis.ru/venv/Lib/site-packages/tastypie/api.py",
-		"/D/Work/web/portal.atm-servis.ru/templates/index.html",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/detail.component.js",
 		"/D/Work/web/portal.atm-servis.ru/portal.atm-servis.ru.sublime-project",
 		"/D/Work/web/portal.atm-servis.ru/main/urls.py",
 		"/D/Work/web/portal.atm-servis.ru/main/views.py",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.routing.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.component.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.module.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/plans/module.js",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/auth-guard.service.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/app.component.js.map",
@@ -384,12 +388,10 @@
 		"/D/Work/web/ng2/package.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/index.html",
 		"/D/Work/web/ng2/tsconfig.json",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/app/main.ts",
 		"/D/Work/web/portal.atm-servis.ru/templates/plan/plan.html",
 		"/D/Work/web/portal.atm-servis.ru/templates/base.html",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/routes/app.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/main.ts",
-		"/D/Work/web/portal.atm-servis.ru/static/ng2/typings.json",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/services/plan.ts",
 		"/D/Work/web/portal.atm-servis.ru/static/ng2/src/plan/routes/plans.ts",
 		"/D/Work/web/JavaScript/Задачки/Promise/src.js",
@@ -439,30 +441,7 @@
 		"/D/Work/web/portal.atm-servis.ru/config/settings/common.py",
 		"/D/Work/web/portal.atm-servis.ru/project/models.py",
 		"/D/Work/web/portal.atm-servis.ru/plan/views.py",
-		"/D/Work/web/portal.atm-servis.ru/ng2/systemjs.config.js",
-		"/D/Work/web/portal.atm-servis.ru/ng2/src/plan/main.ts",
-		"/D/Work/web/portal.atm-servis.ru/ng2/src/plan/components/plans.ts",
-		"/D/Work/web/portal.atm-servis.ru/ng2/src/plan/models/plan.ts",
-		"/D/Work/web/portal.atm-servis.ru/ng2/src/plan/components/plan-item-render.ts",
-		"/D/Work/web/portal.atm-servis.ru/ng2/src/plan/services/plan.ts",
-		"/D/Work/web/portal.atm-servis.ru/plan/urls.py",
-		"/D/Work/web/portal.atm-servis.ru/plan/apps.py",
-		"/D/Work/web/portal.atm-servis.ru/main/models.py",
-		"/D/Work/web/portal.atm-servis.ru/ng2/package.json",
-		"/D/Work/web/portal.atm-servis.ru/config/settings/production.py",
-		"/D/Work/web/portal.atm-servis.ru/requirements/base.txt",
-		"/D/Work/web/portal.atm-servis.ru/config/settings/local.py",
-		"/D/Work/web/portal.atm-servis.ru/requirements/production.txt",
-		"/D/Work/web/portal.atm-servis.ru/config/settings/ldap_auth.py",
-		"/D/Work/web/portal.atm-servis.ru/requirements/local.txt",
-		"/D/Work/web/portal.atm-servis.ru/project/admin.py",
-		"/D/Work/web/portal.atm-servis.ru/config/settings/base.py",
-		"/D/Work/web/portal.atm-servis.ru/timesheet/models.py",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp17181/var/log/httpd/portal.atm-servis.ru.log",
-		"/D/Work/web/portal.atm-servis.ru/require.txt",
-		"/D/Work/web/portal.atm-servis.ru/main/admin.py",
-		"/D/Work/web/atm_s_ru_project/atm_s_ru/main/admin.py",
-		"/C/Users/MakarovAS/AppData/Local/Temp/scp22951/var/log/httpd/portal.atm-servis.ru.log"
+		"/D/Work/web/portal.atm-servis.ru/ng2/systemjs.config.js"
 	],
 	"find":
 	{
@@ -480,6 +459,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"}\n",
 			"';\n",
 			")",
 			"call",
@@ -530,94 +510,35 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "static/ng2/app/plans/task-list.component.ts",
-					"semi_transient": false,
+					"file": "static/ng2/src/main.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 644,
+						"buffer_size": 444,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								513,
-								513
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
-							"use_tab_stops": false
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "api/resources.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5322,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2191,
-								2191
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 684.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "plan/models.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2859,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								592,
-								606
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 228.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -676,7 +597,7 @@
 	},
 	"output.git-push":
 	{
-		"height": 124.0
+		"height": 112.0
 	},
 	"pinned_build_system": "",
 	"project": "portal.atm-servis.ru.sublime-project",
@@ -720,7 +641,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 306.0,
+	"side_bar_width": 257.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

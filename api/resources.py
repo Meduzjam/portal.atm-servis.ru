@@ -1,5 +1,6 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from plan.models import Plan, Project, ProjectPlan, Task, PlanTaskOwner
+from main.models import Department
 from tastypie.api import Api
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
@@ -8,6 +9,15 @@ from django.core.urlresolvers import reverse
 from tastypie.utils import trailing_slash
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
+
+class DepartmentResource(ModelResource):
+	class Meta:
+		queryset = Department.objects.all()
+		resource_name = 'department'
+		fields = ['id','name','code']
+		allowed_methods = ['get']
+		include_resource_uri = False
+		#authentication = SessionAuthentication()
 
 class UserResource(ModelResource):
 	class Meta:
@@ -29,6 +39,8 @@ class ProjectResource(ModelResource):
 
 
 class PlanResource(ModelResource):
+	department = fields.ForeignKey('self', 'department', full=True)	
+
 	class Meta:
 		queryset = Plan.objects.all()
 		resource_name = 'plan'
@@ -39,7 +51,7 @@ class PlanResource(ModelResource):
 		filtering = {
 			'id': ALL,
 			'year': ALL,
-			'department': ALL,
+			'department': ALL_WITH_RELATIONS,
 		}
 
 	def get_projects(self, request, **kwargs):

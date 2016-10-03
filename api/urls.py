@@ -3,6 +3,7 @@ from tastypie.api import Api
 from .resources import *
 
 v1_api = Api(api_name='v1')
+v1_api.register(DepartmentResource())
 v1_api.register(PlanResource())
 v1_api.register(PlanProjectsResource())
 v1_api.register(ProjectResource())

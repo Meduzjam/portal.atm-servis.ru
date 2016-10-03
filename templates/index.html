@@ -1,33 +1,22 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-<html>
   <head>
-    <!-- Set the base href -->
-    <!-- <script>document.write('<base href="' + document.location + '" />');</script> -->
+
     <title>Коропоративный портал ЗАО "АТМ-Сервис"</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'ng2/styles.css' %}">
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="{% static 'ng2/node_modules/core-js/client/shim.min.js' %}"></script>
-
-    <script src="{% static 'ng2/node_modules/zone.js/dist/zone.js' %}"></script>
-    <script src="{% static 'ng2/node_modules/reflect-metadata/Reflect.js' %}"></script>
-    <script src="{% static 'ng2/node_modules/systemjs/dist/system.src.js' %}"></script>
-
-    <script src="{% static 'ng2/systemjs.config.js' %}"></script>
-    <script>
-      System.import('app')
-            .catch(function(err){ console.error(err); });
-    </script>
     
   </head>
   
   <body>
     🔑 {{user.first_name}} {{user.last_name}}<br>
     <portal-app>Загрузка...</portal-app>
+
+    <script type="text/javascript" src="{% static 'ng2/dist/polyfills.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ng2/dist/vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ng2/dist/app.js' %}"></script>
+
   </body>
 
 </html>

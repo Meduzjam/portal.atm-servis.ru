@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
 import datetime
+from main.models import Department
 
 class Project(models.Model):
 	class Meta:
@@ -47,21 +48,27 @@ class Plan(models.Model):
 		verbose_name_plural = 'план'
 		unique_together = (('department','year'),)
 
-	PROGRAM = 'PG'
-	DESIGN = 'DE'
-	IMPLEMENT = 'IM'
+	# PROGRAM = 'PG'
+	# DESIGN = 'DE'
+	# IMPLEMENT = 'IM'
 
-	DEPARTMENT_CHOICES = (
-		(PROGRAM, 'Разработка ПО'),
-		(DESIGN, 'Проектирование'),
-		(IMPLEMENT, 'Внедрение'),
-	)
+	# DEPARTMENT_CHOICES = (
+	# 	(PROGRAM, 'Разработка ПО'),
+	# 	(DESIGN, 'Проектирование'),
+	# 	(IMPLEMENT, 'Внедрение'),
+	# )
 
-	department = models.CharField(
+	# department = models.CharField(
+	# 	verbose_name='отдел',
+	# 	max_length=2,
+	# 	choices=DEPARTMENT_CHOICES, 
+	# 	default=PROGRAM,
+	# )
+
+	department = models.ForeignKey(
+		Department,
 		verbose_name='отдел',
-		max_length=2,
-		choices=DEPARTMENT_CHOICES, 
-		default=PROGRAM,
+		on_delete=models.CASCADE,
 	)
 
 	YEAR_CHOICES = [(r,r) for r in range(datetime.date.today().year, datetime.date.today().year+5)]
@@ -73,7 +80,7 @@ class Plan(models.Model):
 	)
 
 	def __str__(self):
-		return self.department + str(self.year)
+		return self.department.name + str(self.year)
 
 
 class ProjectPlan(models.Model):

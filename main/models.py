@@ -2,6 +2,25 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
+class Department(models.Model):
+    class Meta:
+        db_table = 'department'
+        verbose_name = 'отдел'
+        verbose_name_plural = 'отделы'
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name='название',
+    )
+
+    code = models.CharField(
+        max_length=2,
+        verbose_name='код',
+    )
+
+    def __str__(self):
+        return self.name    
+
 class Profile(models.Model):
     """model to represent additional information about users"""
     class Meta:
