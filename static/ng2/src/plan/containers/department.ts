@@ -16,24 +16,37 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
         [departments]="departments$ | async"
       >
       </department-list>
+      <button (click)="load()" [disabled]="loading$ | async" >Обновить</button>
+      <div class="error" *ngIf="error$">
+        {{error$ | async}}
+      </div>
   `
 })
 export class DepartmentPageComponent implements OnInit {
 
   departments$: Observable<any>;
+  error$: Observable<any>;
+  loading$: Observable<any>;
 
   constructor(
 
     private actions: DepartmentActions,
     private store: Store<any>) {
 
-    this.store.dispatch(this.actions.load());
   }
 
+  load(){
+    this.store.dispatch(this.actions.get());
+  }
+
+
   ngOnInit(){
-    
-    this.departments$ = this.store.select('444');
-    
+
+    this.load();
+    this.departments$ = this.store.select( state => state.department.departments );
+    this.error$ = this.store.select( state => state.department.error );
+    this.loading$ = this.store.select( state => state.department.loading );
+
   }
 
 }

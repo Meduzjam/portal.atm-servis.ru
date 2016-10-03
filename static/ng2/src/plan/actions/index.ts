@@ -1,3 +1,3 @@
-import { DepartmentActions } from './department';
+import { DepartmentActions, departmentActionType } from './department';
 
-export { DepartmentActions } 
+export { DepartmentActions, departmentActionType } 

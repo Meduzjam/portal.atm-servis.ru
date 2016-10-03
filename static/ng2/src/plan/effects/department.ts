@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Effect, Actions } from '@ngrx/effects';
-import { DepartmentActions } from '../actions'
+import { DepartmentActions, departmentActionType } from '../actions'
 import { RestService } from '../services'
 
 @Injectable()
@@ -11,10 +12,12 @@ export class DepartmentEffects {
         private svc: RestService
     ) {}
 
-    @Effect() loadHeroes$ = this.update$
-        .ofType(DepartmentActions.LOAD)
-        .switchMap(() => this.svc.getDepartments())
-        .map(items => this.actions.loadSuccess(items));
+    @Effect() getDepartments$ = this.update$
+        .ofType(departmentActionType.GET)
+        .switchMap(() => this.svc.getDepartments()
+            .map(items => this.actions.getSuccess(items))
+            .catch( err => Observable.of(this.actions.getFail(err)) )
+        );
 
 /*    @Effect() getHero$ = this.update$
         .ofType(HeroActions.GET_HERO)

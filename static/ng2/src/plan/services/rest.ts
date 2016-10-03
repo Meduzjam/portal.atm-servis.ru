@@ -21,8 +21,8 @@ export class RestService {
     const api = '/api/v1/department/';
     let parameters = new URLSearchParams();
     parameters.set('format', 'json');
-
-    return this.http.get(this.endpoint_url + api, { search : parameters })
+    console.log('getDepartments');
+    return this.http.get(`${this.endpoint_url}${api}`, { search : parameters })
       .map(res => Array.prototype.map.call( res.json().objects, 
         (obj:IDepartment) => Department.fromJSON(obj)) );
   }
@@ -108,12 +108,12 @@ export class RestService {
   }*/
 
 
-  private handleError(error: any) {
+/*  private handleError(error: any) {
       let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-      console.error(errMsg); // log to console instead
+      //console.error(errMsg); // log to console instead
       return Observable.throw(errMsg);
-  }
+  }*/
 
 }
 

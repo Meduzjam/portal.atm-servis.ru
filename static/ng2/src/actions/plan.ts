@@ -7,7 +7,8 @@ export class PlanActions {
     static LOAD = '[Plan] Load plans';
     load(): Action {
         return {
-            type: PlanActions.LOAD
+            type: PlanActions.LOAD,
+            payload: null
         };
     }
 

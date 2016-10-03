@@ -1,39 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
+const ACTION_PREFIX = "[Department]";  
+export const departmentActionType = {  
+    GET: `${ACTION_PREFIX} Get`,
+    GET_SUCCESS: `${ACTION_PREFIX} Get Success`,
+    GET_FAIL: `${ACTION_PREFIX} Get Fail`,
+};
+
+
 @Injectable()
 export class DepartmentActions {
-    static ACTION_NAME = 'Department';
 
-    static LOAD = `[${DepartmentActions.ACTION_NAME}] Load`;
-    load(): Action {
+
+    get(): Action {
         return {
-            type: DepartmentActions.LOAD
+            type: departmentActionType.GET
         };
     }
 
-    static LOAD_SUCCESS = `[${DepartmentActions.ACTION_NAME}] Load success`;
-    loadSuccess(items:any): Action {
+    getSuccess(items:any): Action {
         return {
-            type: DepartmentActions.LOAD_SUCCESS,
+            type: departmentActionType.GET_SUCCESS,
             payload: items
         };
     }
 
-    static SAVE = `[${DepartmentActions.ACTION_NAME}] Save`;
-    save(item:any): Action {
+    getFail(error:any): Action {
         return {
-            type: DepartmentActions.SAVE,
-            payload: item
+            type: departmentActionType.GET_FAIL,
+            payload: error
         };
-    }
+    }    
 
-    static SAVE_SUCCESS = `[${DepartmentActions.ACTION_NAME}] Save success`;
-    saveSuccess(item:any): Action {
-        return {
-            type: DepartmentActions.SAVE_SUCCESS,
-            payload: item
-        };
-    }
 
 }
