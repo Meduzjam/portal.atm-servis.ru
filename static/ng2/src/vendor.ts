@@ -9,11 +9,11 @@ import '@angular/router';
 import '@angular/forms';
 // RxJS
 import 'rxjs';
-// @NgRx
+/*// @NgRx
 import '@ngrx/core';
 import '@ngrx/store';
 import '@ngrx/effects';
-import '@ngrx/store-devtools';
+import '@ngrx/store-devtools';*/
 
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...

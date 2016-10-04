@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import * as _ from 'lodash';
 
 import { STORE_PROVIDER_TOKEN, StoreProvider } from '../providers/store-provider';
 import { departmentActionType } from './actions'
@@ -38,7 +39,7 @@ export class DepartmentsStoreProvider extends StoreProvider<DepartmentState> {
             loading: false,
             error: null,
             departments : action.payload,
-            selectedDepartment : state.selectedDepartment
+            selectedDepartment : null
           }
 
         case departmentActionType.GET_FAIL:
@@ -49,8 +50,36 @@ export class DepartmentsStoreProvider extends StoreProvider<DepartmentState> {
             error: action.payload
           });      
 
+        case departmentActionType.SELECT_CURRENT:
+          return Object.assign({}, state, {
+            selectedDepartment: action.payload,
+          });   
+
+
+        case departmentActionType.ADD_SUCCESS:
+          return Object.assign({}, state, {
+            loading: false,
+            error:null
+          });          
+
+        case departmentActionType.EDIT_SUCCESS:
+          let index = _.findIndex(state.departments, {id: action.payload.id});
+          if (index >= 0) {
+            return Object.assign({}, state, {
+              departments: [
+                ...state.departments.slice(0, index),
+                action.payload,
+                ...state.departments.slice(index + 1)
+              ]
+
+            });
+            
+          }
+          return state;          
+
+
         default:
-           	return state;
+          return state;
       }
     }
 }

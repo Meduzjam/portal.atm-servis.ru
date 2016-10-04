@@ -21,12 +21,26 @@ export class RestService {
     const api = '/api/v1/department/';
     let parameters = new URLSearchParams();
     parameters.set('format', 'json');
-    console.log('getDepartments');
     return this.http.get(`${this.endpoint_url}${api}`, { search : parameters })
       .map(res => Array.prototype.map.call( res.json().objects, 
         (obj:IDepartment) => Department.fromJSON(obj)) );
   }
   
+  saveDepartment(department:Department) {
+    const api = '/api/v1/department/';
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+    if (department.id === 0) {
+      return this.http.post(`${this.endpoint_url}${api}`, department, { search : parameters })
+        .map(res => Array.prototype.map.call( res.json().objects, 
+          (obj:IDepartment) => Department.fromJSON(obj)) );
+    } else {
+      return this.http.put(`${this.endpoint_url}${api}`, department, { search : parameters })
+        .map(res => Array.prototype.map.call( res.json().objects, 
+          (obj:IDepartment) => Department.fromJSON(obj)) );
+    }
+  }
+
 /*
   getPlans() {
     const api = '/api/v1/plan';

@@ -1,13 +1,17 @@
 import { DepartmentDetailComponent } from './department/detail';
 import { DepartmentListComponent, DepartmentsInput } from './department/list';
+import { DepartmentForm } from './department/form';
 
 export {
-	DepartmentsInput,
+  DepartmentsInput,
   DepartmentDetailComponent,
   DepartmentListComponent,
+  DepartmentForm,
+
 }
 
-export const COMPONENTS = [
-	DepartmentDetailComponent,
-  DepartmentListComponent
+export const COMPONENTS = [  
+  DepartmentDetailComponent,
+  DepartmentListComponent,
+  DepartmentForm
 ]

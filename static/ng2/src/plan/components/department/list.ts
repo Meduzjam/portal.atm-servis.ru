@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Department } from '../../models';
-import { DepartmentDetailComponent, SelectOutput } from './detail';
+import { DepartmentDetailComponent, DepartmentInput, SelectOutput } from './detail';
 
 export type DepartmentsInput = Department[];
 
@@ -11,7 +11,8 @@ export type DepartmentsInput = Department[];
       <li *ngFor="let department of departments">
         <department-detail 
           [department]="department"
-          (select)="select($event)"
+          [selected]="isSelected(department)"
+          (select)="_select($event)"
           >
         </department-detail>
       </li>
@@ -20,13 +21,17 @@ export type DepartmentsInput = Department[];
 })
 export class DepartmentListComponent {
   @Input() departments: DepartmentsInput;
+  @Input() selected: DepartmentInput;
   @Output() select = new EventEmitter<SelectOutput>();
 
-  selected(obj: Department){
+  _select(item: Department){
 
-    console.dir('Был выбран {obj}');
-    this.select.emit(obj);
+    this.select.emit(item);
 
+  }
+
+  isSelected(item: Department){
+    return this.selected == item;
   }
 
 }

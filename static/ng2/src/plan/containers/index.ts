@@ -1,4 +1,4 @@
-import { DepartmentPageComponent } from './department';
+import { DepartmentPageComponent } from './departments';
 
 export { DepartmentPageComponent }
 
