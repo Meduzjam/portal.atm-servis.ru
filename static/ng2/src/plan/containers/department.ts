@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -15,8 +16,7 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
       
         <department-list 
           [departments]="departments$ | async"
-          [selected]="selected$ | async"
-          (select)="select($event)"
+          (select)="edit($event)"
 
         >
         </department-list>
@@ -24,7 +24,7 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
       <button (click)="load()" [disabled]="loading$ | async" >Обновить</button>
 
 
-      <button (click)="edit(selected$)" [disabled]="(loading$ || !selected$) | async" >Редактировать</button>
+      <button (click)="getDepartment(1)" [disabled]="loading$ | async" >Давай его сюда</button>
 
       <div class="error" *ngIf="error$">
         {{error$ | async}}
@@ -34,36 +34,37 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
 export class DepartmentPageComponent implements OnInit {
 
   departments$: Observable<any>;
+  department$: Observable<any>;
   error$: Observable<any>;
   loading$: Observable<any>;
-  selected$: Observable<any>;
+  // selected$: Observable<any>;
 
   constructor(
-
+    private store: Store<any>,
     private actions: DepartmentActions,
-    private store: Store<any>) {
-
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   load(){
-    this.store.dispatch(this.actions.get());
+    this.store.dispatch(this.actions.getList());
   }
 
-  select(item:Department){
-    this.store.dispatch(this.actions.selectCurrent(item));
+  getDepartment(id:number){
+    this.store.dispatch(this.actions.get(id));
   }
 
   edit(item:Department){
-    this.store.dispatch(this.actions.(item));
+    this.router.navigate(['/department', item.id]);
   }
 
   ngOnInit(){
 
     this.load();
-    this.departments$ = this.store.select( state => state.department.departments );
-    this.error$ = this.store.select( state => state.department.error );
-    this.loading$ = this.store.select( state => state.department.loading );
-    this.selected$ = this.store.select( state => state.department.selectedDepartment );
+    this.departments$ = this.store.select( state => state.departments.departments );
+    this.error$ = this.store.select( state => state.departments.error );
+    this.loading$ = this.store.select( state => state.departments.loading );
+    this.department$ = this.store.select( state => state.department.department );
 
   }
 

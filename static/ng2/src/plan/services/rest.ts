@@ -26,6 +26,14 @@ export class RestService {
         (obj:IDepartment) => Department.fromJSON(obj)) );
   }
   
+  getDepartment(id:number): Observable<Department> {
+    const api = '/api/v1/department/';
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+    return this.http.get(`${this.endpoint_url}${api}${id}/`, { search : parameters })
+      .map(res => Department.fromJSON(res.json()));
+  }
+
   saveDepartment(department:Department) {
     const api = '/api/v1/department/';
     let parameters = new URLSearchParams();

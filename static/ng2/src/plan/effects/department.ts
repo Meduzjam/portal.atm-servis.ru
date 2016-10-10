@@ -13,11 +13,21 @@ export class DepartmentEffects {
     ) {}
 
     @Effect() getDepartments$ = this.update$
-        .ofType(departmentActionType.GET)
+        .ofType(departmentActionType.GET_LIST)
         .switchMap(() => this.svc.getDepartments()
-            .map(items => this.actions.getSuccess(items))
+            .map(items => this.actions.getListSuccess(items))
+            .catch( err => Observable.of(this.actions.getListFail(err)) )
+        );
+
+    @Effect() getDepartment$ = this.update$
+        .ofType(departmentActionType.GET)
+        .map<number>(action => action.payload)
+        .switchMap((id) => this.svc.getDepartment(id)
+            .map(item => this.actions.getSuccess(item))
             .catch( err => Observable.of(this.actions.getFail(err)) )
         );
+
+
 
 /*    @Effect() getHero$ = this.update$
         .ofType(HeroActions.GET_HERO)

@@ -10,62 +10,67 @@ import { DepartmentActions } from '../actions';
 import { Department } from '../models';
 import { DepartmentForm } from '../components';
 
+
+
 @Component({
     selector: 'department-edit-page',
     template: `
         <department-form
-            [department]="hero | async"
+            [department]="department$ | async"
             (back)="goBack()"
             (save)="save($event)"
-        ></rx-hero-form>
+        ></department-form>
     `,
     
 })
-export class DepartmentEdit implements OnInit, OnDestroy {
-    idSub: Subscription;
-    department: Observable<any>;
+export class DepartmentEditPageComponent implements OnInit, OnDestroy {
+    id: number;
+    department$: Observable<any>;
     navigated = false;
 
     @Output() close = new EventEmitter();
 
     constructor(
         private store: Store<any>,
+        private actions: DepartmentActions,
         private route: ActivatedRoute,
-        private heroActions: DepartmentActions,
-        private router: Router
-    ) {
-        this.department = store.select('hero');
+        private router: Router) {
+
+      this.department$ = store.select(state => state.department.department);
     }
 
     ngOnInit() {
-        this.idSub = this.route.params
-            .select<string>('id')
-            .subscribe(id => {
-                if (id) {
-                    this.store.dispatch(this.heroActions.getHero(id));
-                    this.navigated = true;
-                } else {
-                    this.store.dispatch(this.heroActions.resetBlankHero());
-                    this.navigated = false;
-                }
-            });
+
+
+    	this.route.params.forEach((params: Params) => {
+        	this.id = +params['id'];
+	    });
+
+		if (this.id) {
+			this.store.dispatch(this.actions.get(this.id));
+			this.navigated = true;
+		} else {
+			this.store.dispatch(this.actions.resetBlank());
+			this.navigated = false;
+		}
+
     }
 
     ngOnDestroy() {
-        this.idSub.unsubscribe();
+        
     }
 
-    goBack(savedHero: Hero = null) {
-        this.close.emit(savedHero);
+    goBack(savedDepartment: Department = null) {
+        this.close.emit(savedDepartment);
         if (this.navigated) { window.history.back(); }
     }
 
-    save(hero) {
-        if (hero.id === 0) {
-            this.store.dispatch(this.heroActions.addHero(hero));
+    save(department: Department) {
+        if (department.id === 0) {
+            this.store.dispatch(this.actions.add(department));
         } else {
-            this.store.dispatch(this.heroActions.saveHero(hero));
+            this.store.dispatch(this.actions.edit(department));
         }
-        this.goBack(hero);
+        this.goBack(department);
     }
 }

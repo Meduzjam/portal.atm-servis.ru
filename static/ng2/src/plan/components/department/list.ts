@@ -11,7 +11,6 @@ export type DepartmentsInput = Department[];
       <li *ngFor="let department of departments">
         <department-detail 
           [department]="department"
-          [selected]="isSelected(department)"
           (select)="_select($event)"
           >
         </department-detail>
@@ -21,17 +20,12 @@ export type DepartmentsInput = Department[];
 })
 export class DepartmentListComponent {
   @Input() departments: DepartmentsInput;
-  @Input() selected: DepartmentInput;
   @Output() select = new EventEmitter<SelectOutput>();
 
   _select(item: Department){
 
     this.select.emit(item);
 
-  }
-
-  isSelected(item: Department){
-    return this.selected == item;
   }
 
 }

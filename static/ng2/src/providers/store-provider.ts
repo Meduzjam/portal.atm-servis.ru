@@ -1,13 +1,8 @@
 import { OpaqueToken } from '@angular/core';
 import { Action, combineReducers, INITIAL_REDUCER } from '@ngrx/store';
+import { routerReducer } from '@ngrx/router-store';
 
 export const STORE_PROVIDER_TOKEN = new OpaqueToken('StoreProvider');
-
-/*const INITIAL_REDUCER: ActionReducer<any> = 
-  (state: any, action: Action): {} => {
-    console.log('log');
-  return state;
-  }*/
 
 export abstract class StoreProvider<T> {
     abstract name(): string;
@@ -23,6 +18,7 @@ export const STORE_PROVIDER: any[] = [
                 o[provider.name()] = provider.reducer;
                 return o;
             }, {});
+            //obj['router']=routerReducer;
             return combineReducers(obj);
         }
     }

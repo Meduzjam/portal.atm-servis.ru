@@ -11,14 +11,14 @@ import { Department } from '../../models';
       	<label>id: </label>{{department.id}}
     	</div>
     	<div>
-        <label>газвание: </label>
+        <label>название: </label>
         <input [(ngModel)]="department.name" placeholder="name" />
         <label>код: </label>
         <input [(ngModel)]="department.code" placeholder="code" />
     	</div>
     	<button (click)="back.emit()">Назад</button>
-    	<button (click)="save.emit(hero)">Сохранить</button>
-	</div>
+    	<button (click)="save.emit(department)">Сохранить</button>
+	  </div>
 
     `,
     styles: [`
@@ -56,7 +56,8 @@ button:disabled {
 export class DepartmentForm {
     _department:Department;
 
-    @Input() set department(value) {
+    @Input() 
+    set department(value) {
         this._department = Object.assign({}, value);
     }
     get department() {

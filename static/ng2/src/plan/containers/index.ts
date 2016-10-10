@@ -1,7 +1,10 @@
-import { DepartmentPageComponent } from './departments';
+import { DepartmentPageComponent } from './department';
 
-export { DepartmentPageComponent }
+import { DepartmentEditPageComponent } from './department-edit';
+
+export { DepartmentPageComponent,DepartmentEditPageComponent }
 
 export const CONTAINERS = [
-	DepartmentPageComponent
+	DepartmentPageComponent,
+	DepartmentEditPageComponent
 ]

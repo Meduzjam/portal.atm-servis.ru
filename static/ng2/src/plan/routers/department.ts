@@ -1,18 +1,18 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { DepartmentPageComponent }  from '../containers';
+import * as containers from '../containers';
 // import { AuthGuard }  from '../auth-guard.service';
 
 const departmentRoutes: Routes = [
   { 
     path: 'departments',
-    component: DepartmentPageComponent,
+    component: containers.DepartmentPageComponent,
   },
-  /*{ 
+  { 
     path: 'department/:id',
-    component: DepartmentEditPageComponent,
-    canActivate: [AuthGuard]
-  },*/
+    component: containers.DepartmentEditPageComponent,
+    // canActivate: [AuthGuard]
+  },
   
 ];
 
