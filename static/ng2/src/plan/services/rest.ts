@@ -34,18 +34,16 @@ export class RestService {
       .map(res => Department.fromJSON(res.json()));
   }
 
-  saveDepartment(department:Department) {
+  saveDepartment(department:Department): Observable<Department> {
     const api = '/api/v1/department/';
     let parameters = new URLSearchParams();
     parameters.set('format', 'json');
     if (department.id === 0) {
-      return this.http.post(`${this.endpoint_url}${api}`, department, { search : parameters })
-        .map(res => Array.prototype.map.call( res.json().objects, 
-          (obj:IDepartment) => Department.fromJSON(obj)) );
+      return this.http.post(`${this.endpoint_url}${api}`, {name:department.name, code:department.code}, { search : parameters })
+        .map(res => Department.fromJSON(res.json()) );
     } else {
-      return this.http.put(`${this.endpoint_url}${api}`, department, { search : parameters })
-        .map(res => Array.prototype.map.call( res.json().objects, 
-          (obj:IDepartment) => Department.fromJSON(obj)) );
+      return this.http.put(`${this.endpoint_url}${api}${department.id}/`, department, { search : parameters })
+        .map(res => Department.fromJSON(res.json()) );
     }
   }
 

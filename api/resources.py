@@ -3,7 +3,8 @@ from plan.models import Plan, Project, ProjectPlan, Task, PlanTaskOwner
 from main.models import Department
 from tastypie.api import Api
 from tastypie import fields
-from tastypie.authentication import SessionAuthentication
+from tastypie.authentication import SessionAuthentication,Authentication
+from tastypie.authorization import Authorization
 from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from tastypie.utils import trailing_slash
@@ -15,9 +16,11 @@ class DepartmentResource(ModelResource):
 		queryset = Department.objects.all()
 		resource_name = 'department'
 		fields = ['id','name','code']
-		allowed_methods = ['get']
+		allowed_methods = ['get', 'post', 'put', 'delete']
 		include_resource_uri = False
-		#authentication = SessionAuthentication()
+		always_return_data = True
+		authentication = Authentication()
+		authorization = Authorization()
 
 class UserResource(ModelResource):
 	class Meta:

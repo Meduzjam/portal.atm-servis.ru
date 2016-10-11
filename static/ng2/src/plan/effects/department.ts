@@ -27,7 +27,21 @@ export class DepartmentEffects {
             .catch( err => Observable.of(this.actions.getFail(err)) )
         );
 
+    @Effect() editDepartment$ = this.update$
+        .ofType(departmentActionType.EDIT)
+        .map(action => action.payload)
+        .switchMap(item => this.svc.saveDepartment(item)
+            .map(department => this.actions.editSuccess(department))
+            .catch( err => Observable.of(this.actions.editFail(err)) )
+        );
 
+    @Effect() addDepartment$ = this.update$
+        .ofType(departmentActionType.ADD)
+        .map(action => action.payload)
+        .switchMap(item => this.svc.saveDepartment(item)
+            .map(department => this.actions.addSuccess(department))
+            .catch( err => Observable.of(this.actions.addFail(err)) )
+        );
 
 /*    @Effect() getHero$ = this.update$
         .ofType(HeroActions.GET_HERO)

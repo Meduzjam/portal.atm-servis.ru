@@ -24,7 +24,7 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
       <button (click)="load()" [disabled]="loading$ | async" >Обновить</button>
 
 
-      <button (click)="getDepartment(1)" [disabled]="loading$ | async" >Давай его сюда</button>
+      <button (click)="edit(null)">Новый</button>
 
       <div class="error" *ngIf="error$">
         {{error$ | async}}
@@ -55,7 +55,7 @@ export class DepartmentPageComponent implements OnInit {
   }
 
   edit(item:Department){
-    this.router.navigate(['/department', item.id]);
+    this.router.navigate(['/department', item?item.id:0]);
   }
 
   ngOnInit(){

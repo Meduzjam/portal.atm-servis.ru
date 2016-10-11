@@ -21,7 +21,7 @@ export interface DepartmentListState {
 const initialDepartmentSingleState: DepartmentSingleState = {
   loading: false,
   error: null,
-  department: null, 
+  department: {id:0,name:"Ммя", code:"XX"}, 
 };
 
 const initialDepartmentListState: DepartmentListState = {

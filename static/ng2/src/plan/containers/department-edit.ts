@@ -20,12 +20,18 @@ import { DepartmentForm } from '../components';
             (back)="goBack()"
             (save)="save($event)"
         ></department-form>
+
+        <div class="error" *ngIf="error$">
+            {{error$ | async}}
+        </div>
     `,
     
 })
 export class DepartmentEditPageComponent implements OnInit, OnDestroy {
     id: number;
     department$: Observable<any>;
+    error$: Observable<any>;
+    loading$: Observable<any>;
     navigated = false;
 
     @Output() close = new EventEmitter();
@@ -37,6 +43,9 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
         private router: Router) {
 
       this.department$ = store.select(state => state.department.department);
+      this.loading$ = this.store.select( state => state.department.loading );
+      this.error$ = this.store.select( state => state.department.error );
+
     }
 
     ngOnInit() {
@@ -46,13 +55,13 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
         	this.id = +params['id'];
 	    });
 
-		if (this.id) {
-			this.store.dispatch(this.actions.get(this.id));
-			this.navigated = true;
-		} else {
-			this.store.dispatch(this.actions.resetBlank());
-			this.navigated = false;
-		}
+		  if (this.id) {
+			  this.store.dispatch(this.actions.get(this.id));
+			  this.navigated = true;
+		  } else {
+  			this.store.dispatch(this.actions.resetBlank());
+	  		this.navigated = false;
+  		}
 
     }
 
@@ -67,9 +76,9 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
 
     save(department: Department) {
         if (department.id === 0) {
-            this.store.dispatch(this.actions.add(department));
+          this.store.dispatch(this.actions.add(department));
         } else {
-            this.store.dispatch(this.actions.edit(department));
+          this.store.dispatch(this.actions.edit(department));
         }
         this.goBack(department);
     }
