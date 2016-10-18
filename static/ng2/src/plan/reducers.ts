@@ -21,7 +21,7 @@ export interface DepartmentListState {
 const initialDepartmentSingleState: DepartmentSingleState = {
   loading: false,
   error: null,
-  department: {id:0,name:"Ммя", code:"XX"}, 
+  department: {id:0,name:"Наименование", code:"XX"}, 
 };
 
 const initialDepartmentListState: DepartmentListState = {
@@ -62,9 +62,7 @@ export class DepartmentListStoreProvider extends StoreProvider<DepartmentListSta
 
         case departmentActionType.ADD_SUCCESS:{
           return Object.assign({}, state, {
-            departments: [...state.departments, action.payload],
-            loading: false,
-            error:null
+            departments: [...state.departments, action.payload]
           });
         }
 
@@ -87,9 +85,7 @@ export class DepartmentListStoreProvider extends StoreProvider<DepartmentListSta
           return Object.assign({}, state, {
             departments: state.departments.filter(department => {
                 return department.id !== action.payload.id;
-              }),
-            loading: false,
-            error:null
+              })
           });
         }
 
@@ -162,6 +158,25 @@ export class DepartmentSingleStoreProvider extends StoreProvider<DepartmentSingl
           });
 
         case departmentActionType.ADD_FAIL:
+          return Object.assign({}, state, {
+            // department: null,
+            loading: false,
+            error: action.payload
+          });  
+
+        case departmentActionType.DELETE:
+          return Object.assign({}, state, {
+            loading: true,
+            error:null
+          });
+
+        case departmentActionType.DELETE_SUCCESS:
+          return Object.assign({}, state, {
+            loading: false,
+            error:null
+          });
+
+        case departmentActionType.DELETE_FAIL:
           return Object.assign({}, state, {
             // department: null,
             loading: false,

@@ -112,10 +112,35 @@ export class DepartmentActions {
     }
 
     addFail(error:any): Action {
+/*        let foo = error._body? Object.assign({}, error, {
+                        _body:JSON.parse(error._body)
+                      }):error;
+        console.dir(error);*/
         return {
             type: departmentActionType.ADD_FAIL,
             payload: error
         };
     }   
+
+    delete(item:any): Action {
+        return {
+            type: departmentActionType.DELETE,
+            payload: item
+        };
+    }
+
+    deleteSuccess(item:any): Action {
+        return {
+            type: departmentActionType.DELETE_SUCCESS,
+            payload: item
+        };
+    }
+
+    deleteFail(error:any): Action {
+        return {
+            type: departmentActionType.DELETE_FAIL,
+            payload: error
+        };
+    }       
 
 }

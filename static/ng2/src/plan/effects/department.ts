@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Effect, Actions } from '@ngrx/effects';
+import { back, go } from '@ngrx/router-store';
 import { DepartmentActions, departmentActionType } from '../actions'
 import { RestService } from '../services'
+
 
 @Injectable()
 export class DepartmentEffects {
     constructor (
         private update$: Actions,
         private actions: DepartmentActions,
-        private svc: RestService
+        private svc: RestService,
     ) {}
 
     @Effect() getDepartments$ = this.update$
@@ -42,6 +44,30 @@ export class DepartmentEffects {
             .map(department => this.actions.addSuccess(department))
             .catch( err => Observable.of(this.actions.addFail(err)) )
         );
+
+    @Effect() deleteDepartment$ = this.update$
+        .ofType(departmentActionType.DELETE)
+        .map(action => action.payload)
+        .switchMap(item => this.svc.deleteDepartment(item)
+            .map( () => this.actions.deleteSuccess(item))
+            .catch( err => Observable.of(this.actions.deleteFail(err)) )
+        );
+
+
+    @Effect() onEditSuccessDepartment$ = this.update$
+        .ofType(departmentActionType.EDIT_SUCCESS, departmentActionType.ADD_SUCCESS)
+        .map( 
+            () => go('/departments') 
+          );
+
+/*    @Effect({ dispatch: false }) logActions$ = this.update$
+        .ofType(departmentActionType.EDIT_SUCCESS)
+        .do(action => {
+            console.log(action);
+        });*/
+        
+
+
 
 /*    @Effect() getHero$ = this.update$
         .ofType(HeroActions.GET_HERO)

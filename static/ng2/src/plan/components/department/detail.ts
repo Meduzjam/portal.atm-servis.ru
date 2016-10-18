@@ -3,6 +3,7 @@ import { Department } from '../../models';
 
 export type DepartmentInput = Department;
 export type SelectOutput = Department;
+export type DeleteOutput = Department;
 
 @Component({
   selector: 'department-detail',
@@ -21,6 +22,7 @@ export type SelectOutput = Department;
         (click)="select.emit(department)" 
         [class.selected]="selected"
       >{{ id }} - {{ name }} - {{ code }}</button>
+      <button (click)="delete.emit(department)">Удалить</button>
     </div>
   `
 })
@@ -28,7 +30,7 @@ export class DepartmentDetailComponent  {
   @Input() department: DepartmentInput;
   @Input() selected: boolean;
   @Output() select = new EventEmitter<SelectOutput>();
-
+  @Output() delete = new EventEmitter<DeleteOutput>();
 
   get id() {
     return this.department.id;

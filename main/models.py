@@ -11,11 +11,13 @@ class Department(models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name='название',
+        unique=True,
     )
 
     code = models.CharField(
         max_length=2,
         verbose_name='код',
+        unique=True,
     )
 
     def __str__(self):

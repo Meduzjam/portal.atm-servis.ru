@@ -47,6 +47,15 @@ export class RestService {
     }
   }
 
+  deleteDepartment(department:Department): Observable<Boolean> {
+    const api = '/api/v1/department/';
+    let parameters = new URLSearchParams();
+    parameters.set('format', 'json');
+    
+      return this.http.delete(`${this.endpoint_url}${api}${department.id}/`, { search : parameters })
+        .map(res =>  res.ok === true );
+  }
+
 /*
   getPlans() {
     const api = '/api/v1/plan';

@@ -17,6 +17,7 @@ import { DepartmentListComponent, DepartmentsInput } from '../components';
         <department-list 
           [departments]="departments$ | async"
           (select)="edit($event)"
+          (delete)="delete($event)"
 
         >
         </department-list>
@@ -44,6 +45,7 @@ export class DepartmentPageComponent implements OnInit {
     private actions: DepartmentActions,
     private router: Router,
     private route: ActivatedRoute) {
+
   }
 
   load(){
@@ -56,6 +58,10 @@ export class DepartmentPageComponent implements OnInit {
 
   edit(item:Department){
     this.router.navigate(['/department', item?item.id:0]);
+  }
+
+  delete(item:Department){
+    this.store.dispatch(this.actions.delete(item));
   }
 
   ngOnInit(){

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Department } from '../../models';
-import { DepartmentDetailComponent, DepartmentInput, SelectOutput } from './detail';
+import { DepartmentDetailComponent, DepartmentInput, SelectOutput, DeleteOutput } from './detail';
 
 export type DepartmentsInput = Department[];
 
@@ -12,6 +12,7 @@ export type DepartmentsInput = Department[];
         <department-detail 
           [department]="department"
           (select)="_select($event)"
+          (delete)="_delete($event)"
           >
         </department-detail>
       </li>
@@ -21,12 +22,19 @@ export type DepartmentsInput = Department[];
 export class DepartmentListComponent {
   @Input() departments: DepartmentsInput;
   @Output() select = new EventEmitter<SelectOutput>();
+  @Output() delete = new EventEmitter<DeleteOutput>();
 
   _select(item: Department){
 
     this.select.emit(item);
 
   }
+
+  _delete(item: Department){
+
+    this.delete.emit(item);
+
+  }  
 
 }
 

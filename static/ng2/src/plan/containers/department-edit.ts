@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, OnDestroy, Output} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
@@ -17,12 +18,12 @@ import { DepartmentForm } from '../components';
     template: `
         <department-form
             [department]="department$ | async"
-            (back)="goBack()"
+            
             (save)="save($event)"
         ></department-form>
 
-        <div class="error" *ngIf="error$">
-            {{error$ | async}}
+        <div style="color:red" *ngIf="error$ | async">
+            Ошибка: {{ error$ | async}}
         </div>
     `,
     
@@ -32,7 +33,6 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
     department$: Observable<any>;
     error$: Observable<any>;
     loading$: Observable<any>;
-    navigated = false;
 
     @Output() close = new EventEmitter();
 
@@ -57,10 +57,8 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
 
 		  if (this.id) {
 			  this.store.dispatch(this.actions.get(this.id));
-			  this.navigated = true;
 		  } else {
   			this.store.dispatch(this.actions.resetBlank());
-	  		this.navigated = false;
   		}
 
     }
@@ -69,17 +67,12 @@ export class DepartmentEditPageComponent implements OnInit, OnDestroy {
         
     }
 
-    goBack(savedDepartment: Department = null) {
-        this.close.emit(savedDepartment);
-        if (this.navigated) { window.history.back(); }
-    }
-
     save(department: Department) {
         if (department.id === 0) {
           this.store.dispatch(this.actions.add(department));
         } else {
           this.store.dispatch(this.actions.edit(department));
         }
-        this.goBack(department);
+        
     }
 }
